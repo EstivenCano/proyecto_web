@@ -43,8 +43,7 @@
     </b-form>
     <b-table striped hover :items="lista_convenios">
         <template v-slot:cell(acciones)="row">
-          <b-button size="sm" @click="cargarEstudiante(row)" class="mr-2">Modificar</b-button>
-          <b-button size="sm" @click="eliminarEstudiante(row)" class="mr-2">Eliminar</b-button>
+          <b-button size="sm" @click="cargarEstudiante(row)" class="mr-2">aplicar a convenio</b-button>
         </template>
       </b-table>
   </div>
@@ -71,6 +70,7 @@
           descripcion: "",
           acciones: true
         },
+        
         lista_convenios: [
           {
             id: "0001",
@@ -78,6 +78,14 @@
             ciudad: "medellin",
             universidad: "udem",
             descripcion: "este convenio te da una beca del 10 porciento por ser extranjero",
+            acciones: true
+          },
+          {
+            id: "0002",
+            pais: "colombia",
+            ciudad: "medellin",
+            universidad: "unal-mede",
+            descripcion: "este convenio te da una beca del 80 porciento por ser extranjero",
             acciones: true
           }
         ],
