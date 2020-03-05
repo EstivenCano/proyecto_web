@@ -18,9 +18,9 @@ c. selección de concepto (aprobado o rechazado)
 d. notificación a actor
 
 # Desarrolladores
-1. Joan Cadena Paternina - innmortal_20@live.com
-2. Sebastian Diez - Estudiante de ingenieria de sistemas, cursa el quinto semestre de su carrera,- sebasdiez84@gmail.com
-3. Estiven Cano - estivencano99@gmail.com
+1. Joan Cadena Paternina - Estudiante de ingenieria de sistemas de 5to semestre - innmortal_20@live.com
+2. Sebastian Diez - Estudiante de ingenieria de sistemas de 5to semestre- sebasdiez84@gmail.com
+3. Estiven Cano - Estudiante de ingenieria de sistemas de 5to semestre - estivencano99@gmail.com
 
 # Funcionalidades
 - [A] CRUD de aplicación a convenios.
@@ -44,4 +44,3 @@ d. notificación a actor
   ```
 - [C] Listado de convenio con filtros y posibilidad para enviar a varios correos.
 
----
