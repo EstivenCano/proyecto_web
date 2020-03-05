@@ -1,87 +1,85 @@
 <template>
   <div>
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group
-        id="input-group-1"
-        label="Correo Electronico:"
-        label-for="input-1"
-        description="Este correo no sera compartido."
-      >
-        <b-form-input
-          id="input-1"
-          v-model="form.email"
-          type="email"
-          required
-          placeholder="Ingresar correo"
-        ></b-form-input>
-      </b-form-group>
+    <b-container fluid="md">
+      <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+        <b-form-group label="ID:" label-for="id">
+          <b-form-input
+            class="form-control"
+            type="text"
+            v-model="form.id"
+            placeholder="Ingrese ID de la tarea"
+            id="id"
+          />
+        </b-form-group>
 
-      <b-form-group id="input-group-2" label="Nombre:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="form.name"
-          required
-          placeholder="Ingresar nombre"
-        ></b-form-input>
-      </b-form-group>
+        <b-form-group label=" Nombre:" label-for="nombre">
+          <b-form-input
+            class="form-control"
+            type="text"
+            v-model="form.nombre"
+            placeholder=" Ingrese Nombre de la tarea"
+            id="nombre"
+          />
+        </b-form-group>
 
-      <b-form-group id="input-group-3" label="Food:" label-for="input-3">
-        <b-form-select
-          id="input-3"
-          v-model="form.food"
-          :options="foods"
-          required
-        ></b-form-select>
-      </b-form-group>
+        <b-form-group label=" Descripción:" label-for="desc">
+          <b-form-input
+            class="form-control"
+            type="text"
+            v-model="form.desc"
+            placeholder="Ingrese descripción de la tarea"
+            id="desc"
+          />
+        </b-form-group>
 
-      <b-form-group id="input-group-4">
-        <b-form-checkbox-group v-model="form.checked" id="checkboxes-4">
-          <b-form-checkbox value="me">Check me out</b-form-checkbox>
-          <b-form-checkbox value="that">Check that out</b-form-checkbox>
-        </b-form-checkbox-group>
-      </b-form-group>
+        <b-form-group label=" Estado:" label-for="estado">
+          <b-form-input
+            class="form-control"
+            type="number"
+            v-model="form.estado"
+            placeholder="Ingrese estado de la tarea (1:acitva/2:inactiva)"
+            id="estado"
+          />
+        </b-form-group>
 
-      <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
-    </b-form>
-    <b-card class="mt-3" header="Form Data Result">
-      <pre class="m-0">{{ form }}</pre>
-    </b-card>
+        <b-button type="submit" variant="primary">Crear Tarea</b-button>
+        <b-button type="reset" variant="danger">Limpiar</b-button>
+      </b-form>
+    </b-container>
   </div>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        form: {
-          email: '',
-          name: '',
-          food: null,
-          checked: []
-        },
-        foods: [{ text: 'Select One', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
-        show: true
-      }
-    },
-    methods: {
-      onSubmit(evt) {
-        evt.preventDefault()
-        alert(JSON.stringify(this.form))
+export default {
+  data() {
+    return {
+      form: {
+        id: "",
+        nombre: "",
+        desc: "",
+        estado: null
       },
-      onReset(evt) {
-        evt.preventDefault()
-        // Reset our form values
-        this.form.email = ''
-        this.form.name = ''
-        this.form.food = null
-        this.form.checked = []
-        // Trick to reset/clear native browser form validation state
-        this.show = false
-        this.$nextTick(() => {
-          this.show = true
-        })
-      }
+      show: true
+    };
+  },
+  methods: {
+    onSubmit(evt) {
+      evt.preventDefault();
+      alert(JSON.stringify(this.form));
+    },
+    onReset(evt) {
+      evt.preventDefault();
+      // Reset our form values
+      this.form.id = "";
+      this.form.nombre = "";
+      this.form.desc = "";
+      this.form.estado = null;
+      // Trick to reset/clear native browser form validation state
+      this.show = false;
+      this.$nextTick(() => {
+        this.show = true;
+      });
     }
   }
+};
 </script>
