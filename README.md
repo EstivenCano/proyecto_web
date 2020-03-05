@@ -19,7 +19,7 @@ d. notificación a actor
 
 # Desarrolladores
 1. Joan Cadena Paternina - innmortal_20@live.com
-2. Sebastian Diez - sebasdiez84@gmail.com
+2. Sebastian Diez - Estudiante de ingenieria de sistemas, cursa el quinto semestre de su carrera,- sebasdiez84@gmail.com
 3. Estiven Cano - estivencano99@gmail.com
 
 # Funcionalidades

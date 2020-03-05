@@ -1,16 +1,12 @@
 <template>
   <div>
-    <div>
+        <div>
       <b-navbar toggleable="lg" type="dark" variant="dark">
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Escudo_Universidad_de_Medellin.svg/1200px-Escudo_Universidad_de_Medellin.svg.png"
-          fluid
-          alt="Responsive image"
-          height="60px"
-          width="70px"
-        />
-        <b-navbar-brand href>| Gestion de Movilidad |</b-navbar-brand>
-
+        <img src="https://www.onlygfx.com/wp-content/uploads/2017/11/grunge-circle-frame-3-1024x1017.png" 
+        fluid alt="Responsive image" height= "50px" width="50px">
+        <b-navbar-brand href="#"> </b-navbar-brand>
+        <b-navbar-brand href="">Gestion de Movilidad</b-navbar-brand>
+        
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
         <b-collapse id="nav-collapse" is-nav>
@@ -32,7 +28,7 @@
               <template v-slot:button-content>
                 <em>Usuario</em>
               </template>
-              <b-dropdown-item href="#">Perfil</b-dropdown-item>
+              <b-dropdown-item href="#">Ingresar</b-dropdown-item>
               <b-dropdown-item href="#">Salir</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
