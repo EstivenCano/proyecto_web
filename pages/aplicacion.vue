@@ -72,9 +72,7 @@
         <b-button @click="actualizarAplicacion()" variant="primary" v-if="enEdicion">Actualizar</b-button>
         <b-button type="reset" variant="danger">Limpiar</b-button>
       </b-form>
-      <b-card class="mt-3" header="Vista previa">
-        <pre class="m-0">{{ form }}</pre>
-      </b-card>
+      
     </b-card>
 
     <br />

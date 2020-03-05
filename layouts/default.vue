@@ -1,11 +1,11 @@
 <template>
   <div>
         <div>
-      <b-navbar toggleable="lg" type="dark" variant="info">
+      <b-navbar toggleable="lg" type="dark" variant="dark">
         <img src="https://www.onlygfx.com/wp-content/uploads/2017/11/grunge-circle-frame-3-1024x1017.png" 
         fluid alt="Responsive image" height= "50px" width="50px">
         <b-navbar-brand href="#"> </b-navbar-brand>
-        <b-navbar-brand href="#">Gestion de Movilidad</b-navbar-brand>
+        <b-navbar-brand href="">Gestion de Movilidad</b-navbar-brand>
         
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -28,7 +28,7 @@
               <template v-slot:button-content>
                 <em>Usuario</em>
               </template>
-              <b-dropdown-item href="#">Perfil</b-dropdown-item>
+              <b-dropdown-item href="#">Ingresar</b-dropdown-item>
               <b-dropdown-item href="#">Salir</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
