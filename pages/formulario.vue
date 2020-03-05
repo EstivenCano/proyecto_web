@@ -1,12 +1,16 @@
 <template>
   <div>
     <b-container fluid="md">
-      <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+      <center>
+        <h1>Gestión de Tareas</h1>
+      </center>
+      <br />
+      <b-form action="javascript:void(0)" @submit="crearTarea()" @reset="onReset" >
         <b-form-group label="ID:" label-for="id">
           <b-form-input
             class="form-control"
             type="text"
-            v-model="form.id"
+            v-model="tarea.id"
             placeholder="Ingrese ID de la tarea"
             id="id"
           />
@@ -16,70 +20,38 @@
           <b-form-input
             class="form-control"
             type="text"
-            v-model="form.nombre"
+            v-model="tarea.nombre"
             placeholder=" Ingrese Nombre de la tarea"
             id="nombre"
           />
         </b-form-group>
 
-        <b-form-group label=" Descripción:" label-for="desc">
+        <b-form-group label=" Descripción:" label-for="descripcion">
           <b-form-input
             class="form-control"
             type="text"
-            v-model="form.desc"
+            v-model="tarea.descripcion"
             placeholder="Ingrese descripción de la tarea"
-            id="desc"
+            id="descripcion"
           />
         </b-form-group>
 
         <b-form-group label=" Estado:" label-for="estado">
-          <b-form-input
-            class="form-control"
-            type="number"
-            v-model="form.estado"
-            placeholder="Ingrese estado de la tarea (1:acitva/2:inactiva)"
-            id="estado"
-          />
+          <b-form-select class="form-control" v-model="tarea.estado" :options="estado" id="estado" />
         </b-form-group>
 
-        <b-button type="submit" variant="primary">Crear Tarea</b-button>
+        <b-button type="submit" variant="primary" v-if="!enEdicion">Crear Tarea</b-button>
+        <b-button @click="actualizarTarea()" variant="primary" v-else>Actualizar Tarea</b-button>
         <b-button type="reset" variant="danger">Limpiar</b-button>
-      </b-form>
+      </b-form><br>
+      <b-table striped hover :items="lista_tareas">
+        <template v-slot:cell(acciones)="row">
+          <b-button size="sm" @click="cargarTarea(row)" class="mr-2">Modificar</b-button>
+          <b-button size="sm" @click="eliminarTarea(row)" class="mr-2">Eliminar</b-button>
+        </template>
+      </b-table>
     </b-container>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      form: {
-        id: "",
-        nombre: "",
-        desc: "",
-        estado: null
-      },
-      show: true
-    };
-  },
-  methods: {
-    onSubmit(evt) {
-      evt.preventDefault();
-      alert(JSON.stringify(this.form));
-    },
-    onReset(evt) {
-      evt.preventDefault();
-      // Reset our form values
-      this.form.id = "";
-      this.form.nombre = "";
-      this.form.desc = "";
-      this.form.estado = null;
-      // Trick to reset/clear native browser form validation state
-      this.show = false;
-      this.$nextTick(() => {
-        this.show = true;
-      });
-    }
-  }
-};
-</script>
+<script src="@/assets/formulario.js"/>
