@@ -11,6 +11,7 @@
             <b-nav-item :to="{name:'index'}">Inicio</b-nav-item>
             <b-nav-item :to="{name:'formulario'}">Aplicacion de beca</b-nav-item>
             <b-nav-item :to="{name:'aplicacion'}">Aplicacion</b-nav-item>
+            <b-nav-item :to="{name:'listaFiltrada'}">Lista de convenios</b-nav-item>
           </b-navbar-nav>
 
           <!-- Right aligned nav items -->
