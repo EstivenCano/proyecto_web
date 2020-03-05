@@ -1,10 +1,7 @@
 <template>
 
-
-  
   <div>
-
-      
+  
 
   <b-card>
     <b-card-text>
@@ -46,16 +43,13 @@
       </b-form-group>
 
       <b-form-group id="input-group-4">
-        <b-form-checkbox-group v-model="form.checked" id="checkboxes-4">
-          <b-form-checkbox value="me">Check me out</b-form-checkbox>
-          <b-form-checkbox value="that">Check that out</b-form-checkbox>
-        </b-form-checkbox-group>
+  
       </b-form-group>
 
-      <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
+      <b-button type="submit" variant="primary">Aceptar</b-button>
+      <b-button type="reset" variant="danger">Limpiar</b-button>
     </b-form>
-    <b-card class="mt-3" header="Form Data Result">
+    <b-card class="mt-3" header="Vista previa">
       <pre class="m-0">{{ form }}</pre>
     </b-card>
 
@@ -76,7 +70,7 @@
           food: null,
           checked: []
         },
-        foods: [{ text: 'Select One', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
+        foods: [{ text: 'Seleciona una', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
         show: true
       }
     },
