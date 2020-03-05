@@ -41,7 +41,10 @@
         </b-form-group>
 
         <b-form-group id="input-group-2" label="Nombre:" label-for="input-2">
-          <b-form-input id="nombre" v-model="form.name" required placeholder="Ingresar nombre"></b-form-input>
+          <b-form-input 
+          id="nombre" 
+          v-model="form.name" required placeholder="Ingresar nombre">
+          </b-form-input>
         </b-form-group>
 
         <b-form-group id="input-group-6" label="Documento de identidad:" label-for="input-6">
@@ -111,7 +114,7 @@ export default {
           nombre: "Celeste",
           correo: "celeste@gmail.com",
           telefono: "351245",
-          convenio: "Movilidad",
+          convenio: null,
           acciones: true
         }
       ],
@@ -174,14 +177,24 @@ export default {
       let posicion = this.aplicaciones.findIndex(
         aplicacion => aplicacion.id == item.id
       );
+
+      var personJSONFromLS = localStorage.getItem("aplistorage");
+      var personFromLS = JSON.parse(personJSONFromLS);
+
+      this.aplicaciones = personFromLS;
+
       this.aplicaciones.splice(posicion, 1);
+
+      var jsonPerson = JSON.stringify(this.aplicaciones);
+      localStorage.setItem("aplistorage", jsonPerson);
+
     },
     /*Llena los campos del formulario con los datos de la aplicacion para luego ser editados, segun la fila
     en que se encuentre*/
-    cargarAplicacion({ item }) {
+    cargarAplicacion({ item }) { 
       let apli = this.aplicaciones.find(aplicacion => aplicacion.id == item.id);
       this.aplicacion = Object.assign({}, apli);
-      document.getElementById("id_usuario").value = apli.id_usuario;
+      document.getElementById("id_usuario").value = apli.id;
       document.getElementById("email").value = apli.correo;
       document.getElementById("telefono").value = apli.telefono;
       document.getElementById("nombre").value = apli.nombre;
@@ -196,7 +209,14 @@ export default {
         aplicacion => aplicacion.id == this.aplicacion.id
       );
 
+      var personJSONFromLS = localStorage.getItem("aplistorage");
+      var personFromLS = JSON.parse(personJSONFromLS);
+      this.aplicaciones = personFromLS;
+
       this.aplicaciones.splice(1, posicion);
+
+      var jsonPerson = JSON.stringify(this.aplicaciones);
+      localStorage.setItem("aplistorage", jsonPerson);
 
       this.enEdicion = false;
     },
@@ -216,6 +236,7 @@ export default {
       this.form.convenio = null;
       // Trick to reset/clear native browser form validation state
       this.show = false;
+      this.enEdicion = false;
       this.$nextTick(() => {
         this.show = true;
       });
