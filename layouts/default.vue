@@ -2,8 +2,9 @@
   <div>
         <div>
       <b-navbar toggleable="lg" type="dark" variant="info">
-        <img src="https://lh3.googleusercontent.com/proxy/yqbq_5-ZdgMOoFDvr0GWwx6wHB3AcdqNrwFf2tI6dV5Syfj-qYzWhFeNw6ccKbtEq0TWE4c141BSQM3o4OdOvaSlSISm7r1nxxc9nrVK2w" 
-        fluid alt="Responsive image" height= "60px" width="70px">
+        <img src="https://www.onlygfx.com/wp-content/uploads/2017/11/grunge-circle-frame-3-1024x1017.png" 
+        fluid alt="Responsive image" height= "50px" width="50px">
+        <b-navbar-brand href="#"> </b-navbar-brand>
         <b-navbar-brand href="#">Gestion de Movilidad</b-navbar-brand>
         
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>

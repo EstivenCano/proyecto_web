@@ -21,18 +21,22 @@
           id="input-2"
           v-model="form.name"
           required
-          placeholder="Ingresar nombre"
+          placeholder="Ingresar nombre completo"
         ></b-form-input>
+
       </b-form-group>
 
-      <b-form-group id="input-group-3" label="Food:" label-for="input-3">
+
+
+      <b-form-group id="input-group-3" label="Convenios:" label-for="input-3">
         <b-form-select
           id="input-3"
-          v-model="form.food"
-          :options="foods"
+          v-model="form.convenio"
+          :options="convenios"
           required
         ></b-form-select>
       </b-form-group>
+
 
       <b-form-group id="input-group-4">
         <b-form-checkbox-group v-model="form.checked" id="checkboxes-4">
@@ -60,7 +64,7 @@
           food: null,
           checked: []
         },
-        foods: [{ text: 'Select One', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
+        convenios: [{ text: 'Select One', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
         show: true
       }
     },
