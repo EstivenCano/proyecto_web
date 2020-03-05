@@ -5,7 +5,7 @@
         <b-form-group id="input-group-1" label="Pais:" label-for="input-1">
             <b-form-select v-model="selected1" :options="options1"></b-form-select>
             <br >
-            <b-button block variant="dark">Block Level Button</b-button>
+            <b-button @click="listarEstudiantesPorPais()" variant="dark">Busqueda unicamente por pais</b-button>
         </b-form-group>
 
         <b-form-group id="input-group-2" label="Ciudad:" label-for="input-2">
@@ -32,6 +32,14 @@
                     <b-form-select-option :value=" 'unal-bog' ">Universidad Nacional de Bogota</b-form-select-option>
                     <b-form-select-option :value=" 'uniandes' ">Universidad de los Andes</b-form-select-option>
                 </b-form-select-option-group>  
+                <b-form-select-option-group label="Universidades ubicadas en Alemania-Múnich">
+                    <b-form-select-option :value=" 'munich-uoas' ">Munich university of applied sciences</b-form-select-option>
+                    <b-form-select-option :value=" 'munich-university' ">Universidad de munich</b-form-select-option>
+                </b-form-select-option-group>  
+                <b-form-select-option-group label="Universidades ubicadas en Alemania-Berlín">
+                    <b-form-select-option :value=" 'berlin-tu' ">Tu Berlín</b-form-select-option>
+                    <b-form-select-option :value=" 'berlin-ulb' ">Universidad libre de Berlín</b-form-select-option>
+                </b-form-select-option-group>  
             </b-form-select>
             <b-button block variant="dark">Block Level Button</b-button>
         </b-form-group>
@@ -41,10 +49,8 @@
       
       
     </b-form>
-    <b-table striped hover :items="lista_convenios">
-        <template v-slot:cell(acciones)="row">
-          <b-button size="sm" @click="cargarEstudiante(row)" class="mr-2">aplicar a convenio</b-button>
-        </template>
+    <b-table  id="lista" striped hover :items="lista_convenios">
+        
       </b-table>
   </div>
 </template>
@@ -52,6 +58,7 @@
 <script>
   export default {
     data() {
+      lista_convenios:[]
       return {
         selected1: null,
         options1: [
@@ -59,7 +66,7 @@
             { value: 'colombia', text: 'Colombia' },
             { value: 'usa', text: 'Estados Unidos' },
             { value: 'argentina', text: 'Argentina' },
-            { value: 'alemania', text: 'Alemania', disabled: true }
+            { value: 'alemania', text: 'Alemania'}
         ],
 
         convenio: {
@@ -87,30 +94,36 @@
             universidad: "unal-mede",
             descripcion: "este convenio te da una beca del 80 porciento por ser extranjero",
             acciones: true
-          }
+          },
+          {
+            id: "0003",
+            pais: "colombia",
+            ciudad: "bogota",
+            universidad: "unal-bog",
+            descripcion: "este convenio te da una beca del 20 porciento por ser extranjero",
+            acciones: true
+          },
+          {
+            id: "0004",
+            pais: "alemania",
+            ciudad: "bogota",
+            universidad: "unal-bog",
+            descripcion: "este convenio te da una beca del 20 porciento por ser extranjero",
+            acciones: true
+          },
         ],
 
         show: true
       }
     },
+    
+
     methods: {
-      onSubmit(evt) {
-        evt.preventDefault()
-        alert(JSON.stringify(this.form))
-      },
-      onReset(evt) {
-        evt.preventDefault()
-        // Reset our form values
-        this.form.email = ''
-        this.form.name = ''
-        this.form.food = null
-        this.form.checked = []
-        // Trick to reset/clear native browser form validation state
-        this.show = false
-        this.$nextTick(() => {
-          this.show = true
-        })
+      listarEstudiantesPorPais(){
+        this.lista_convenios.filter((items) => items.pais.includes(this.pais));
+
       }
+
     }
   }
 </script>
