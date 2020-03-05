@@ -10,7 +10,7 @@
         <b-form-group id="input-group-1" label="Pais:" label-for="input-1">
           <b-form-select v-model="selected1" :options="options1"></b-form-select>
           <br />
-          <b-button block variant="dark">Block Level Button</b-button>
+          <b-button size="sm" @click="listarConveniosPais(selected1)" variant="dark">Buscar convenios por pais</b-button>
         </b-form-group>
 
         <b-form-group id="input-group-2" label="Ciudad:" label-for="input-2">
@@ -24,7 +24,7 @@
               <b-form-select-option :value=" 'alemania/berlin' ">Berlín</b-form-select-option>
             </b-form-select-option-group>
           </b-form-select>
-          <b-button block variant="dark">Block Level Button</b-button>
+          <b-button size="sm" @click="listarConveniosCiudad(selected1)" variant="dark">_Buscar convenios por ciudad</b-button>
         </b-form-group>
 
         <b-form-group id="input-group-3" label="Universidad:" label-for="input-3">
@@ -38,7 +38,7 @@
               <b-form-select-option :value=" 'uniandes' ">Universidad de los Andes</b-form-select-option>
             </b-form-select-option-group>
           </b-form-select>
-          <b-button block variant="dark">Block Level Button</b-button>
+          <b-button size="sm" @click="listarConveniosUniversidad(selected2)" variant="dark">_Buscar convenios por universidaD</b-button>
         </b-form-group>
 
         <div class="mt-1">
@@ -93,22 +93,14 @@ export default {
     };
   },
   methods: {
-    onSubmit(evt) {
-      evt.preventDefault();
-      alert(JSON.stringify(this.form));
+    listarConveniosPais(pais){
+      this.listarConveniosPais((items)=> items.pais.includes(this.pais));
     },
-    onReset(evt) {
-      evt.preventDefault();
-      // Reset our form values
-      this.form.email = "";
-      this.form.name = "";
-      this.form.food = null;
-      this.form.checked = [];
-      // Trick to reset/clear native browser form validation state
-      this.show = false;
-      this.$nextTick(() => {
-        this.show = true;
-      });
+    listarConveniosCiudad(ciudad){
+      this.listarConveniosPais((items)=> items.ciudad.includes(this.ciudad));
+    },
+    listarConveniosUniversidad(universidad){
+      this.listarConveniosPais((items)=> items.universidad.includes(this.universidad));
     }
   }
 };
