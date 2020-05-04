@@ -8,7 +8,7 @@
         <h1 style="font-size:250%;">Formulario de aplicación a convenio</h1>
         <!-- Imagen decorativa sobre formularios -->
         <img
-          src="https://cdn3.iconfinder.com/data/icons/20-business-flat-icons-shadow/96/75-512.png"
+          src="https://pngimage.net/wp-content/uploads/2018/06/formulario-png-5.png"
           fluid
           alt="Responsive image"
           height="150px"

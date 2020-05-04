@@ -1,17 +1,11 @@
 export default {
+
   data() {
     return {
       /*Determina si la aplicación se encuentra en estado de edición*/
       enEdicion: false,
       /*Array de aplicaciones*/
-      aplicaciones: [{
-        id: "001",
-        nombre: "Celeste",
-        correo: "celeste@gmail.com",
-        telefono: "351245",
-        convenio: "Movilidad",
-        acciones: true
-      }],
+      aplicaciones: [],
       /*Objeto de aplicaciones*/
       aplicacion: {
         id: "",
@@ -54,6 +48,7 @@ export default {
 
     /*Almacena los datos obtenidos del formulario en un objeto aplicacion y lo guarda en el array(aplicaciones)*/
     crearAplicacion() {
+      
       this.aplicacion = {
         id: document.getElementById("id_usuario").value,
         nombre: document.getElementById("nombre").value,
@@ -63,10 +58,16 @@ export default {
         acciones: true
       };
 
-      this.aplicaciones.push(this.aplicacion);
-      /*Convierte el array aplicaciones en un JSON y lo almacena en el localStorage*/
-      var jsonPerson = JSON.stringify(this.aplicaciones);
-      localStorage.setItem("aplistorage", jsonPerson);
+      let existe = this.aplicaciones.find(x => this.aplicacion.id === x.id)
+      if (existe) {
+          alert('El usuario ya esta registrado o el id ya existe');
+          return;
+      }else{
+        this.aplicaciones.push(this.aplicacion);
+        /*Convierte el array aplicaciones en un JSON y lo almacena en el localStorage*/
+        var jsonPerson = JSON.stringify(this.aplicaciones);
+        localStorage.setItem("aplistorage", jsonPerson);
+      }
     },
     /*Busca la posicion del objeto dentro del array y lo elimina*/
     eliminarAplicacion({
@@ -95,11 +96,12 @@ export default {
 
     /*Toma la posicion de la aplicacion en el array y lo reemplaza por el objeto modificado*/
     actualizarAplicacion() {
+
       let posicion = this.aplicaciones.findIndex(
         aplicacion => aplicacion.id == this.aplicacion.id
       );
-
-      this.aplicaciones.splice(1, posicion);
+      
+      this.aplicaciones.splice(posicion, 1);
 
       this.enEdicion = false;
     },
