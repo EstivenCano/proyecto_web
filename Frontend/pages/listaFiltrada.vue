@@ -7,10 +7,13 @@
       <br />
 
       <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+
+        <!-- Aqui se busca el convenio por pais  -->
         <b-form-group id="input-group-1" label="Pais:" label-for="input-1">
+
           <b-form-select v-model="selected1" :options="options1"></b-form-select>
-          <br />
           <b-button size="sm" @click="listarConveniosPais(selected1)" variant="dark">Buscar convenios por pais</b-button>
+
         </b-form-group>
 
         <b-form-group id="input-group-2" label="Ciudad:" label-for="input-2">
