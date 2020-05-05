@@ -19,7 +19,8 @@ app.get("/",(req,res)=>{
 }); 
 
 //Importar las rutas con los endpoints especificos
-
+const rutas_aplicacion = require('./routes/aplicacion')
+app.use(rutas_aplicacion)
 
 //Puerto
 const port = 3001
