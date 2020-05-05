@@ -46,7 +46,7 @@
               <b-form-select-option :value=" 'uniandes' ">Universidad de los Andes</b-form-select-option>
             </b-form-select-option-group>
           </b-form-select>
-          <b-button size="sm" @click="listarConveniosUniversidad(selected2)" variant="dark">_Buscar convenios por universidaD</b-button>
+          <b-button size="sm" @click="listarConveniosUniversidad(selected2)" variant="dark">Buscar convenios por universidad</b-button>
         </b-form-group>
 
         <div class="mt-1">
