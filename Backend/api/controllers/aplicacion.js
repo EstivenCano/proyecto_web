@@ -12,7 +12,6 @@ let consultarAplicacion = async () => {
     let servicio = new ServicioPg();
     let sql = `SELECT * FROM public.cm_aplicaciones`
     let respuesta = await servicio.ejecutarSql(sql)
-    console.log(respuesta);
     
     return respuesta;
   };

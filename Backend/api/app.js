@@ -24,6 +24,7 @@ app.use(rutas_aplicacion)
 
 //Puerto
 const port = 3001
+
 //Levantar el servidor para escuchar los puertos
 app.listen(port,() =>{
     console.log(`Escuchando API en http://localhost:${port}`)
