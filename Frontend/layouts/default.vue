@@ -19,7 +19,7 @@
             <b-nav-item>|</b-nav-item>
             <b-nav-item :to="{ name: 'formulario' }">Tareas</b-nav-item>
             <b-nav-item>|</b-nav-item>
-            <b-nav-item :to="{ name: 'aplicacion' }">Aplicacion</b-nav-item>
+            <b-nav-item :to="{ name: 'aplicacion' }">Aplicación</b-nav-item>
             <b-nav-item>|</b-nav-item>
             <b-nav-item :to="{ name: 'listaFiltrada' }"
               >Lista de convenios</b-nav-item

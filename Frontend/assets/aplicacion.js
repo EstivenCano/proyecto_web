@@ -10,17 +10,19 @@ export default {
       aplicacion: {
         id: "",
         nombre: "",
+        apellido:"",
         correo: "",
-        telefono: "",
+        celular: "",
         convenio: null,
         acciones: true
       },
       /*Parametros de formulario*/
       form: {
-        email: "",
-        name: "",
+        correo: "",
+        nombre: "",
+        apellido:"",
         id_usuario: "",
-        telefono: "",
+        celular: "",
         convenio: null
       },
 
@@ -31,7 +33,7 @@ export default {
         },
         "Movilidad",
         "Intercambio",
-        "Proyecto de investigacion"
+        "Proyecto de investigación"
       ],
       show: true
     };
