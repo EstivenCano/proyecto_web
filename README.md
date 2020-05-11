@@ -33,13 +33,15 @@ d. notificación a actor
     convenio: null,
   }
   ```
-- [B] CRUD de tareas 
+- [B] CRUD de seguimientos-acciones de movilidad (activación de movilidad) por aplicación
   ```js
   {
     id: "",
-    nombre: "",
-    descripcion: "",
-    estado: []
+    id_aplicacion: "",
+    fecha: "",
+    comentario: "",
+    estado: "",
+    archivo:""
   }
   ```
 - [C] Listado de convenio con filtros y posibilidad para enviar a varios correos.
