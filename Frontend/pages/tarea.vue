@@ -1,10 +1,11 @@
 <template>
   <div>
     <b-container fluid="md">
+      <br/>
       <center>
         <h1>Gestión de Tareas</h1>
       </center>
-      <br />
+      <hr/>
       <!-- Formulario con los parametros indicados -->
       <b-form action="javascript:void(0)" @submit="crearTarea()" @reset="onReset" >
         <!-- Opciones dentro del formulario -->
@@ -15,6 +16,7 @@
             v-model="tarea.id"
             placeholder="Ingrese ID de la tarea"
             id="id"
+            required
           />
         </b-form-group>
 
@@ -25,6 +27,7 @@
             v-model="tarea.nombre"
             placeholder=" Ingrese Nombre de la tarea"
             id="nombre"
+            required
           />
         </b-form-group>
 
@@ -35,12 +38,21 @@
             v-model="tarea.descripcion"
             placeholder="Ingrese descripción de la tarea"
             id="descripcion"
+            required
           />
         </b-form-group>
-        <!-- b-form-select para los estados de tareas -->
-        <b-form-group label=" Estado:" label-for="estado">
-          <b-form-select class="form-control" v-model="tarea.estado" :options="estado" id="estado" />
+
+        <b-form-group label=" Modulo:" label-for="modulo">
+          <b-form-input
+            class="form-control"
+            type="text"
+            v-model="tarea.modulo"
+            placeholder="Ingrese el modulo al que pertenece la tarea"
+            id="modulo"
+            required
+          />
         </b-form-group>
+        
 
         <!-- Botones agrupados -->
         <b-button type="submit" variant="primary" v-if="!enEdicion">Crear Tarea</b-button>
@@ -60,4 +72,4 @@
   </div>
 </template>
 
-<script src="@/assets/formulario.js"/>
+<script src="@/assets/tarea.js"/>
