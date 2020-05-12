@@ -61,7 +61,7 @@
       </b-form><br>
 
       <!-- Tabla de tareas -->
-      <b-table striped hover :items="lista_tareas" :fields="fields">
+      <b-table striped hover :items="lista_tareas" :fields="fields" v-if="cargada">
         <template v-slot:cell(acciones)="row">
           <!-- Botones para editar tareas de la lista -->
           <b-button size="sm" @click="cargarTarea(row)" class="mr-2">Modificar</b-button>

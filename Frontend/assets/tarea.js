@@ -2,6 +2,7 @@ export default {
   data() {
     return {
       enEdicion: false,
+      cargada: false,
       lista_tareas: [],
       fields: ["id", "nombre", "descripcion", "modulo", "acciones"],
       tarea: {
@@ -21,7 +22,7 @@ export default {
       this.tarea.id = "";
       this.tarea.nombre = "";
       this.tarea.descripcion = "";
-      this.tarea.estado = null;
+      this.tarea.modulo = "";
     },
 
     cargarLS() {
@@ -30,6 +31,7 @@ export default {
         .get(url)
         .then(respuesta => {
           this.lista_tareas = respuesta.data;
+          this.cargada = true;
         })
         .catch(error => {
           console.log(error);
@@ -41,7 +43,9 @@ export default {
       let url = "http://127.0.0.1:3001/tarea";
       this.$axios
         .post(url, tr)
-        .then(respuesta => {})
+        .then(respuesta => {
+          this.cargarLS();
+        })
         .catch(error => {});
       this.tarea = {
         id: "",
@@ -57,7 +61,9 @@ export default {
       let url = "http://127.0.0.1:3001/tarea/" + id;
       this.$axios
         .delete(url)
-        .then(respuesta => {})
+        .then(respuesta => {
+          this.cargarLS();
+        })
         .catch(error => {});
       this.tarea = {
         id: ""
