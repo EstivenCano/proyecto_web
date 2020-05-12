@@ -59,14 +59,16 @@ let guardarAplicacion = async aplicacion => {
   try {
     let servicio = new ServicioPg();
     let sql = `INSERT INTO public.cm_aplicaciones(
-        nombre, apellido, correo, id_convenio, celular, estado_aplicacion)
+        nombre, apellido, correo, id_usuario,id_convenio,celular, estado_aplicacion,acciones)
         VALUES (
             '${aplicacion.nombre}', 
             '${aplicacion.apellido}', 
             '${aplicacion.correo}', 
+            '${aplicacion.id_usuario}',
             '${aplicacion.id_convenio}',
             '${aplicacion.celular}',
-            'Enviado');`;
+            'Enviado',
+            'true');`;
     let respuesta = await servicio.ejecutarSql(sql);
     return respuesta;
   } catch (error) {
