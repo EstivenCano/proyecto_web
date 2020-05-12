@@ -1,14 +1,31 @@
 <template>
- 
+  <div>
+    <b-container fluid="md">
+      <br />
+      <center>
+        <h1>Gestión de Movilidad</h1>
+      </center>
+      <br />
 
+      <div class="info-columna">
+        <p>
+          <center><h4> Desarrollada por:</h4></center>
+          <center>
+          JOAN SEBASTIÁN CADENA PATERNINA<br />
+          ESTIVEN CANO URREGO<br />
+          SEBASTIÁN DÍEZ VALLEJO
+        </center>
+        
+        </p>
+        <hr />
+      </div>
+    </b-container>
+  </div>
 </template>
 
 <script>
-
 export default {
-  components: {
-    
-  }
+  components: {}
 };
 </script>
 
