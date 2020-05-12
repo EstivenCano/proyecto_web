@@ -3,6 +3,7 @@ export default {
     return {
       enEdicion: false,
       lista_tareas: [],
+      fields: ["id", "nombre", "descripcion", "modulo", "acciones"],
       tarea: {
         id: "",
         nombre: "",

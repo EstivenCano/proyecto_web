@@ -9,7 +9,7 @@
       <!-- Formulario con los parametros indicados -->
       <b-form action="javascript:void(0)" @submit="crearTarea()" @reset="onReset" >
         <!-- Opciones dentro del formulario -->
-        <b-form-group label="ID:" label-for="id" v-if!="enEdicion">
+        <b-form-group label="ID:" label-for="id" v-if="!enEdicion">
           <b-form-input
             class="form-control"
             type="number"
@@ -17,7 +17,7 @@
             placeholder="Ingrese ID de la tarea"
             id="id"
             required
-            v-if!="enEdicion"            
+            v-if="!enEdicion"            
           />
         </b-form-group>
 
@@ -61,9 +61,9 @@
       </b-form><br>
 
       <!-- Tabla de tareas -->
-      <b-table striped hover :items="lista_tareas">
+      <b-table striped hover :items="lista_tareas" :fields="fields">
         <template v-slot:cell(acciones)="row">
-          <!-- Botones para editar y eliminar tareas de la lista -->
+          <!-- Botones para editar tareas de la lista -->
           <b-button size="sm" @click="cargarTarea(row)" class="mr-2">Modificar</b-button>
         </template>
       </b-table>
