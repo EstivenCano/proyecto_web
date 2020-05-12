@@ -27,7 +27,7 @@
       <!-- Formulario con los parametros indicados -->
       <b-form
         action="javascript:void(0)"
-        @submit="crearAplicacion"
+        @submit="guardarAplicacion"
         @reset="onReset"
         v-if="show"
       >
@@ -66,7 +66,6 @@
           ></b-form-input>
         </b-form-group>
 
-
         <b-form-group
           id="input-group-6"
           label="Documento de identidad:"
@@ -75,7 +74,7 @@
           <b-form-input
             id="id_usuario"
             v-model="form.id_usuario"
-            required
+            required    
             placeholder="Ingresar documento de identidad"
           ></b-form-input>
         </b-form-group>
@@ -95,8 +94,8 @@
           label-for="input-3"
         >
           <b-form-select
-            id="convenio"
-            v-model="form.convenio"
+            id="id_convenio"
+            v-model="form.id_convenio"
             :options="convenios"
             required
           ></b-form-select>
@@ -104,7 +103,10 @@
 
         <!-- Botones agrupados -->
         <b-form-group id="input-group-4"></b-form-group>
-        <b-button type="submit" variant="primary" v-if="!enEdicion"
+        <b-button
+          type="submit"
+          variant="primary"
+          v-if="!enEdicion"
           >Aceptar</b-button
         >
         <b-button
@@ -113,18 +115,21 @@
           v-if="enEdicion"
           >Actualizar</b-button
         >
-        <b-button type="reset" variant="danger">Limpiar</b-button>
+        <b-button type="reset" v-if="!enEdicion" variant="danger"
+          >Limpiar</b-button
+        >
+
+        <b-button @click="cancelarEdicion()" v-if="enEdicion" variant="danger"
+          >Cancelar</b-button
+        >
       </b-form>
     </b-container>
-
+    <!-- Linea divisora -->
+    <hr />
     <br />
     <center>
       <h3>Lista de aplicaciones</h3>
       <br />
-      <!-- Boton para recargar la lista con los datos guardados en el LocalStorage -->
-      <b-button @click="recargarAplicaciones()" variant="primary"
-        >Recargar aplicaciones</b-button
-      >
     </center>
     <br />
 
@@ -132,10 +137,10 @@
     <b-table striped hover :items="aplicaciones">
       <template v-slot:cell(acciones)="row">
         <!-- Botones para editar y eliminar aplicaciones de la lista -->
-        <b-button size="sm" @click="cargarAplicacion(row)" class="mr-2"
+        <b-button size="sm" @click="modificarAplicacion(row)" class="mr-2" variant="warning"
           >Modificar</b-button
         >
-        <b-button size="sm" @click="eliminarAplicacion(row)" class="mr-2"
+        <b-button size="sm" @click="eliminarAplicacion(row)" class="mr-2" variant="danger"
           >Eliminar</b-button
         >
       </template>

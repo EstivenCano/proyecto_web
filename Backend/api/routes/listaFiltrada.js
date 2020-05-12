@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const { consultarConvenioPais, consultarConvenioCiudad, consultarConvenioEntidad } = require("../controllers/aplicacion");
+const { 
+    consultarConvenioPais, 
+    consultarConvenioCiudad, 
+    consultarConvenioEntidad } = require("../controllers/listaFiltrada");
 
 /**
  * Se obtienen todos las entidadesConConveniosPais

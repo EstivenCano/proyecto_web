@@ -8,11 +8,14 @@ const ServicioPg = require('../services/postgres');
 /**
  * Consultar convenios por pais
  * @param {*} pais
+ * SELECT id, nombre, direccion, pagina_web, nit, pais, departamento, ciudad
+	FROM public.cm_entidades where pais = '${pais}';
  */
 let consultarConvenioPais = async (pais) => {
 
     let servicio = new ServicioPg();
-    let sql = ` SELECT * FROM public.cm_entidades WHERE pais = '${pais}' `;
+    let sql = ` SELECT id, nombre, direccion, pagina_web, nit, pais, departamento, ciudad FROM public.cm_entidades WHERE pais = '${pais}' `;
+
     let respuesta = await servicio. ejecutarSql(sql);
     return respuesta;
 }
@@ -25,7 +28,8 @@ let consultarConvenioPais = async (pais) => {
 let consultarConvenioCiudad = async (ciudad) => {
 
     let servicio = new ServicioPg();
-    let sql = ` SELECT * FROM public.cm_entidades WHERE ciudad = '${ciudad}' `;
+    let sql = ` SELECT id, nombre, direccion, pagina_web, nit, pais, departamento, ciudad
+	FROM public.cm_entidades WHERE ciudad = '${ciudad}' `;
     let respuesta = await servicio. ejecutarSql(sql);
     return respuesta;
 }
@@ -38,7 +42,8 @@ let consultarConvenioCiudad = async (ciudad) => {
 let consultarConvenioEntidad = async (nombre) => {
 
     let servicio = new ServicioPg();
-    let sql = ` SELECT * FROM public.cm_entidades WHERE nombre = '${nombre}' `;
+    let sql = ` SELECT id, nombre, direccion, pagina_web, nit, pais, departamento, ciudad
+	FROM public.cm_entidades WHERE nombre = '${nombre}' `;
     let respuesta = await servicio. ejecutarSql(sql);
     return respuesta;
 }

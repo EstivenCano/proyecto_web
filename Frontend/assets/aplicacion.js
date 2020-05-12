@@ -1,5 +1,9 @@
 export default {
-
+  beforeMount() {
+    //Carga las aplicaciones antes de ser llamadas por la página.
+    this.cargarLista();
+    this.limpiarLista();
+  },
   data() {
     return {
       /*Determina si la aplicación se encuentra en estado de edición*/
@@ -10,20 +14,23 @@ export default {
       aplicacion: {
         id: "",
         nombre: "",
-        apellido:"",
+        apellido: "",
         correo: "",
+        id_usuario: "",
         celular: "",
-        convenio: null,
+        id_convenio: null,
         acciones: true
       },
       /*Parametros de formulario*/
       form: {
-        correo: "",
         nombre: "",
-        apellido:"",
+        apellido: "",
+        correo: "",
         id_usuario: "",
         celular: "",
-        convenio: null
+        id_convenio: null,
+        acciones: true
+
       },
 
       /*Opciones de convenio en la lista desplegable*/
@@ -31,96 +38,187 @@ export default {
           text: "Selecciona un convenio",
           value: null
         },
-        "Movilidad",
-        "Intercambio",
-        "Proyecto de investigación"
+        {
+          text: "Movilidad",
+          value: 1
+        }, {
+          text: "Intercambio",
+          value: 2
+        },
+        {
+          text: "Investigación",
+          value: 3
+        }
       ],
       show: true
     };
   },
   /*Métodos*/
   methods: {
-    /*Llama el JSON almacenado en el localStorage y lo convierte a array(aplicaciones)*/
-    recargarAplicaciones() {
-      var personJSONFromLS = localStorage.getItem("aplistorage");
-      var personFromLS = JSON.parse(personJSONFromLS);
 
-      this.aplicaciones = personFromLS;
-    },
+    //Toma los datos del formulario.
+    datosFormulario() {
 
-    /*Almacena los datos obtenidos del formulario en un objeto aplicacion y lo guarda en el array(aplicaciones)*/
-    crearAplicacion() {
+      this.form = {
       
-      this.aplicacion = {
-        id: document.getElementById("id_usuario").value,
-        nombre: document.getElementById("nombre").value,
-        correo: document.getElementById("email").value,
-        telefono: document.getElementById("telefono").value,
-        convenio: document.getElementById("convenio").value,
+        nombre: document.getElementById('nombre').value,
+        apellido: document.getElementById('apellido').value,
+        correo: document.getElementById('correo').value,
+        id_usuario: document.getElementById('id_usuario').value,
+        celular: document.getElementById('celular').value,
+        id_convenio: document.getElementById('id_convenio').value,
+        estado_aplicacion: "Enviado",
         acciones: true
-      };
-
-      let existe = this.aplicaciones.find(x => this.aplicacion.id === x.id)
-      if (existe) {
-          alert('El usuario ya esta registrado o el id ya existe');
-          return;
-      }else{
-        this.aplicaciones.push(this.aplicacion);
-        /*Convierte el array aplicaciones en un JSON y lo almacena en el localStorage*/
-        var jsonPerson = JSON.stringify(this.aplicaciones);
-        localStorage.setItem("aplistorage", jsonPerson);
       }
+      return this.form;
     },
-    /*Busca la posicion del objeto dentro del array y lo elimina*/
+
+    //Carga la lista de las aplicaciones desde la base de datos
+    cargarLista() {
+      let url = 'http://localhost:3001/aplicacion';
+      this.loading = true;
+      //Trae todos los marcadores desde la base de datos.
+      this.$axios
+        .get(url)
+        .then(response => {
+          //Asigna los marcadores al array de marcadores global para ser enlistados.
+          this.aplicaciones = response.data.info;
+          this.ordenarAsc(this.aplicaciones, 'nombre');
+
+        })
+        .catch(error => {
+          console.log(error);
+        });
+
+    },
+
+    //Guarda la aplicación que fue ingresada en la página.
+    guardarAplicacion() {
+      let url = 'http://localhost:3001/aplicacion'
+      this.$axios.post(url, this.datosFormulario()).then(respuesta => {
+        //Recarga los marcadores de la base de datos.
+        alert("Aplicación guardada con éxito")
+        this.cargarLista();
+        //Reestablece los campos del formulario.
+        this.limpiarLista();
+      }).catch(error => {
+
+      });
+    },
+
+    //Elimina el marcador seleccionado. 
     eliminarAplicacion({
       item
     }) {
-      let posicion = this.aplicaciones.findIndex(
-        aplicacion => aplicacion.id == item.id
-      );
-      this.aplicaciones.splice(posicion, 1);
+      let url = `http://localhost:3001/aplicacion/${item.id}`
+
+      var opcion = confirm(`¿Desea eliminar la aplicación ${item.nombre}?`);
+      if (opcion == true) {
+        this.$axios.delete(url, this.datosFormulario()).then(respuesta => {
+          this.cargarLista();
+          alert(`La aplicación ${item.id} ha sido eliminada`);
+        }).catch(error => {});
+      } else {
+        alert(`La operación ha sido cancelada`);
+      }
     },
-    /*Llena los campos del formulario con los datos de la aplicacion para luego ser editados, segun la fila
+
+
+    /*Llena los campos del formulario con los datos de la aplicación para luego ser editados, según la fila
     en que se encuentre*/
-    cargarAplicacion({
+    modificarAplicacion({
       item
     }) {
-      let apli = this.aplicaciones.find(aplicacion => aplicacion.id == item.id);
-      this.aplicacion = Object.assign({}, apli);
-      this.form.id_usuario = apli.id;
-      this.form.email = apli.correo;
-      this.form.telefono = apli.telefono;
-      this.form.name = apli.nombre;
-      this.form.convenio = apli.convenio;
-      /*Cambia el estado de edicion, para hacer visible el boton Actualizar*/
+
+      this.form.id = item.id
+      this.form.nombre = item.nombre;
+      this.form.apellido = item.apellido;
+      this.form.correo = item.correo;
+      this.form.celular = item.celular;
+      this.form.id_usuario = item.id_usuario;
+      this.form.id_convenio = item.id_convenio;
+      this.item = item;
       this.enEdicion = true;
     },
 
-    /*Toma la posicion de la aplicacion en el array y lo reemplaza por el objeto modificado*/
+    //Actualiza el elemento seleccionado con los datos ingresados.
     actualizarAplicacion() {
 
-      let posicion = this.aplicaciones.findIndex(
-        aplicacion => aplicacion.id == this.aplicacion.id
-      );
-      
-      this.aplicaciones.splice(posicion, 1);
+      //Elemento que será el body enviado en el put
+      let actualizado = {
+        id: this.item.id,
+        nombre: document.getElementById('nombre').value,
+        apellido: document.getElementById('apellido').value,
+        correo: document.getElementById('correo').value,
+        id_usuario: document.getElementById('id_usuario').value,
+        celular: document.getElementById('celular').value,
+        id_convenio: document.getElementById('id_convenio').value,
+        estado_aplicacion: "Enviado",
+        acciones: true
+      }
 
-      this.enEdicion = false;
+      //Actualiza el elemento con el id ingresado en la url.
+      let url = `http://localhost:3001/aplicacion/${this.item.id}`
+      this.$axios.put(url, actualizado).then(respuesta => {
+        //Alerta de éxito.
+        alert(`La aplicación ${this.item.id} ha sido actualizada`);
+        //Reestablece el objeto.
+        this.item = {};
+        //Cambia el estado de edición, y con ello la visibilidad del botón. 
+        this.enEdicion = false;
+        this.cargarLista();
+        this.cancelarEdicion();
+      }).catch(error => {
+        //Alerta de error.
+        alert(`No pudo actualizarse la aplicación, error: ${error}`)
+        this.item = {};
+        this.enEdicion = false;
+      });
+
+    },
+
+    //Cancela la edición de la aplicación.
+    cancelarEdicion(){
+      this.form.id = "";
+      this.form.nombre = "";
+      this.form.apellido = "";
+      this.form.correo = "";
+      this.form.celular = "";
+      this.form.id_usuario = "";
+      this.form.id_convenio = null;
+      this.enEdicion =false;
+      this.item = {};
+
+    },
+
+    //Limpia los campos del formulario.
+    limpiarLista() {
+      this.form.id = "";
+      this.form.nombre = "";
+      this.form.apellido = "";
+      this.form.correo = "";
+      this.form.celular = "";
+      this.form.id_usuario = "";
+      this.form.id_convenio = null;
+    },
+
+    //Ordenar array de aplicaciones para ser enlistados.
+    ordenarAsc(p_array_json, p_key) {
+      p_array_json.sort(function (a, b) {
+        return a[p_key] > b[p_key];
+      });
     },
 
     onSubmit(evt) {
       evt.preventDefault();
       alert(JSON.stringify(this.form));
+      this.guardarAplicacion();
     },
     /*Limpia los campos del formulario*/
     onReset(evt) {
       evt.preventDefault();
-      // Reset our form values
-      this.form.email = "";
-      this.form.name = "";
-      this.form.telefono = "";
-      this.form.id_usuario = "";
-      this.form.convenio = null;
+      // Reestablece los valores del formulario
+      this.limpiarLista();
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {
