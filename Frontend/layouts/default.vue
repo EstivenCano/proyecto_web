@@ -16,9 +16,9 @@
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <b-nav-item>|</b-nav-item>
-            <b-nav-item :to="{ name: 'formulario' }">Tareas</b-nav-item>
-            <b-nav-item>|</b-nav-item>
+            <b-nav-item v-show="true">|</b-nav-item>
+            <b-nav-item :to="{ name: 'tarea' }" v-show="true">Tareas</b-nav-item>
+            <b-nav-item >|</b-nav-item>
             <b-nav-item :to="{ name: 'aplicacion' }">Aplicación</b-nav-item>
             <b-nav-item>|</b-nav-item>
             <b-nav-item :to="{ name: 'listaFiltrada' }"
