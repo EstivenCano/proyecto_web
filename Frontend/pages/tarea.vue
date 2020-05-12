@@ -9,7 +9,7 @@
       <!-- Formulario con los parametros indicados -->
       <b-form action="javascript:void(0)" @submit="crearTarea()" @reset="onReset" >
         <!-- Opciones dentro del formulario -->
-        <b-form-group label="ID:" label-for="id" v-if="enEdicion">
+        <b-form-group label="ID:" label-for="id" v-if!="enEdicion">
           <b-form-input
             class="form-control"
             type="number"
@@ -17,7 +17,7 @@
             placeholder="Ingrese ID de la tarea"
             id="id"
             required
-            v-if="enEdicion"            
+            v-if!="enEdicion"            
           />
         </b-form-group>
 

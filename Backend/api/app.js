@@ -1,5 +1,5 @@
 const express = require("express");
-const cors = require("cors");
+const cors = require('cors');
 
 //Inicializar la libreria
 const app = express();
@@ -15,7 +15,8 @@ app.get("/", (req, res) => {
 
 //Importar las rutas con los endpoints especificos
 const rutas_aplicacion = require("./routes/aplicacion");
-app.use(rutas_aplicacion);
+const rutas_tarea = require("./routes/tarea");
+app.use(rutas_aplicacion, rutas_tarea);
 
 //Puerto
 const port = 3001;
