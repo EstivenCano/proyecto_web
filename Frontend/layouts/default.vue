@@ -21,6 +21,8 @@
             <b-nav-item >|</b-nav-item>
             <b-nav-item :to="{ name: 'aplicacion' }">Aplicación</b-nav-item>
             <b-nav-item>|</b-nav-item>
+            <b-nav-item :to="{ name: 'seguimiento' }">Seguimiento</b-nav-item>
+            <b-nav-item>|</b-nav-item>
             <b-nav-item :to="{ name: 'listaFiltrada' }"
               >Lista de convenios</b-nav-item
             >

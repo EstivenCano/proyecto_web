@@ -9,7 +9,7 @@
       <!-- Formulario con los parametros indicados -->
       <b-form action="javascript:void(0)" @submit="crearTarea()" @reset="onReset" >
         <!-- Opciones dentro del formulario -->
-        <b-form-group label="ID:" label-for="id" v-if="!enEdicion">
+        <b-form-group label="Codigo:" label-for="id" v-if="!enEdicion">
           <b-form-input
             class="form-control"
             type="number"

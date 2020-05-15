@@ -16,7 +16,8 @@ app.get("/", (req, res) => {
 //Importar las rutas con los endpoints especificos
 const rutas_aplicacion = require("./routes/aplicacion");
 const rutas_tarea = require("./routes/tarea");
-app.use(rutas_aplicacion, rutas_tarea);
+const rutas_seguimiento = require("./routes/seguimiento");
+app.use(rutas_aplicacion, rutas_tarea, rutas_seguimiento);
 
 //Puerto
 const port = 3001;
