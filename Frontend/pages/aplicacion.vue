@@ -37,6 +37,8 @@
           <b-form-input
             id="nombre"
             v-model="form.nombre"
+            v-facade="'AAAAAAAAAAAAAAAAA'"
+            type = "text"
             required
             placeholder="Ingresar nombre"
           ></b-form-input>
@@ -46,6 +48,8 @@
           <b-form-input
             id="apellido"
             v-model="form.apellido"
+            v-facade="'AAAAAAAAAAAAAAAAA'"
+            type = "text"
             required
             placeholder="Ingresar apellido"
           ></b-form-input>
@@ -74,6 +78,7 @@
           <b-form-input
             id="id_usuario"
             v-model="form.id_usuario"
+            v-facade="'##############'"
             required    
             placeholder="Ingresar documento de identidad"
           ></b-form-input>
@@ -83,8 +88,11 @@
           <b-form-input
             id="celular"
             v-model="form.celular"
+            type = "tel"
+            v-facade="'###-###-####'"
             required
             placeholder="Ingresar número de celular"
+            
           ></b-form-input>
         </b-form-group>
         <!-- b-form-select para los convenios disponibles -->
