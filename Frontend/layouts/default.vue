@@ -23,23 +23,19 @@
             <b-nav-item>|</b-nav-item>
             <b-nav-item :to="{ name: 'seguimiento' }">Seguimiento</b-nav-item>
             <b-nav-item>|</b-nav-item>
-            <b-nav-item :to="{ name: 'listaFiltrada' }">Lista de convenios</b-nav-item>
+            <b-nav-item :to="{ name: 'listaConvenios' }">Buscar convenios</b-nav-item>
+            <b-nav-item>|</b-nav-item>
           </b-navbar-nav>
 
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
-            <b-nav-form>
-              <b-form-input size="sm" class="mr-sm-2" placeholder="Buscar"></b-form-input>
-              <b-button size="sm" class="my-2 my-sm-0" type="submit">Buscar</b-button>
-            </b-nav-form>
-
-            <b-nav-item-dropdown right>
+              <b-nav-item-dropdown right>
               <!-- Using 'button-content' slot -->
               <template v-slot:button-content>
-                <em>Usuario</em>
+                <em>Ingresar</em>
               </template>
-              <b-dropdown-item href="#">Ingresar</b-dropdown-item>
-              <b-dropdown-item href="#">Salir</b-dropdown-item>
+              <b-dropdown-item href="#">Usuario</b-dropdown-item>
+              <b-dropdown-item href="#">Admin</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>

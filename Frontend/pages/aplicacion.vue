@@ -69,7 +69,7 @@
         <b-form-group id="input-group-5" label="Celular:" label-for="input-5">
           <b-form-input
             id="celular"
-            type="number"
+            type="text"
             v-model="form.celular"
             required
             placeholder="Ingresar número de celular"
