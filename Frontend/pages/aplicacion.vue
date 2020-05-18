@@ -79,10 +79,6 @@
         <b-form-group id="input-group-5" label="Celular:" label-for="input-5">
           <b-form-input
             id="celular"
-<<<<<<< HEAD
-            type="text"
-=======
->>>>>>> 0d2965bc9145a054f4a089f37452b8dc46c940ea
             v-model="form.celular"
             type = "tel"
             v-facade="'###-###-####'"

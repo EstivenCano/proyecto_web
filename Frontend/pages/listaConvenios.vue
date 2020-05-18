@@ -7,11 +7,11 @@
       </center>
       <hr />
 
-      <b-form action="javascript:void(0)" @submit="cargarPorTipo()" @reset="onReset">
+      <b-form action="javascript:void(0)" @submit="cargarConvenio()" @reset="onReset">
         <b-form-group label="Filtrar por tipo de convenio:" label-for="filtro1" v-if="!enEdicion">
           <b-form-input
             class="form-control"
-            type="text"
+            type="number"
             v-model="tarea.id"
             placeholder="Ingrese ID de la tarea"
             id="id"
