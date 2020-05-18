@@ -31,7 +31,7 @@ router.post("/tarea", (req, resp) => {
         _controlador.guardarTarea(info_tarea).then(respuestaDB => {
             resp.send({ ok: true, mensaje: "Efectivamente guardada" });
         }).catch(error => {
-            resp.send(error);
+            resp.send({ ok: false, mensaje: "Error al guardar" });
         });
 
     } catch (error) {
@@ -42,9 +42,9 @@ router.post("/tarea", (req, resp) => {
 router.delete("/tarea/:id", (req, resp) => {
     let id = req.params.id;
     _controlador.eliminarTarea(id).then((respuestaDB) => {
-        resp.send({ ok: true, mensaje: "Eliminada exitosamente " });
+        resp.send(respuestaDB);
     }).catch((error) => {
-        resp.send({ ok: false, mensaje: "Error al eliminar ", info: "" });
+        resp.send(error);
     });
 
 

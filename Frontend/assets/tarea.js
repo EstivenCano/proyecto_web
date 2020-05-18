@@ -44,6 +44,11 @@ export default {
       this.$axios
         .post(url, tr)
         .then(respuesta => {
+          if (respuesta.data.ok == true) {
+            alert("Tarea Guardada con Éxito");
+          } else {
+            alert("Error al Guardar Tarea");
+          }
           this.cargarLS();
         })
         .catch(error => {});
@@ -62,6 +67,11 @@ export default {
       this.$axios
         .delete(url)
         .then(respuesta => {
+          if (respuesta.data.rowCount != 0) {
+            alert("Tarea Eliminada con Éxito");
+          } else {
+            alert("Tarea inexistente");
+          }
           this.cargarLS();
         })
         .catch(error => {});
@@ -74,6 +84,7 @@ export default {
       let aux = this.lista_tareas.find(tarea => tarea.id == item.id);
       this.enEdicion = true;
       this.tarea = Object.assign({}, aux);
+      alert("Ahora Puedes Modificar la Tarea");
     },
 
     actualizarTarea() {
@@ -83,7 +94,10 @@ export default {
       let url = "http://127.0.0.1:3001/tarea/" + id;
       this.$axios
         .put(url, tr)
-        .then(respuesta => {})
+        .then(respuesta => {
+          alert("Tarea Actualizada");
+          this.cargarLS();
+        })
         .catch(error => {});
       this.tarea = {
         id: "",
