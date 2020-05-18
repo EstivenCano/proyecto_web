@@ -1,11 +1,19 @@
+import { InputFacade, facade, filter } from 'vue-input-facade';
+
 export default {
   beforeMount() {
     //Carga las aplicaciones antes de ser llamadas por la página.
     this.cargarLista();
     this.limpiarLista();
   },
+
+  components: { InputFacade },
+  directives: { facade },
+  filters: { facade: filter },
+
   data() {
     return {
+      
       /*Determina si la aplicación se encuentra en estado de edición*/
       enEdicion: false,
       /*Array de aplicaciones*/
@@ -113,7 +121,7 @@ export default {
     }) {
       let url = `http://localhost:3001/aplicacion/${item.id}`
 
-      var opcion = confirm(`¿Desea eliminar la aplicación ${item.nombre}?`);
+      var opcion = confirm(`¿Desea eliminar la aplicación ${item.id}?`);
       if (opcion == true) {
         this.$axios.delete(url, this.datosFormulario()).then(respuesta => {
           this.cargarLista();

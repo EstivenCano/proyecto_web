@@ -28,14 +28,23 @@
       <b-form action="javascript:void(0)" @submit="guardarAplicacion" @reset="onReset" v-if="show">
         <!-- Opciones dentro del formulario -->
 
-        <b-form-group id="input-group-2" label="Nombre(s):" label-for="input-2">
-          <b-form-input id="nombre" v-model="form.nombre" required placeholder="Ingresar nombre"></b-form-input>
+        <b-form-group id="input-group-2" label="Nombre:" label-for="input-2">
+          <b-form-input
+            id="nombre"
+            v-model="form.nombre"
+            v-facade="'AAAAAAAAAAAAAAAAA'"
+            type = "text"
+            required
+            placeholder="Ingresar nombre"
+          ></b-form-input>
         </b-form-group>
 
         <b-form-group id="input-group-7" label="Apellido(s):" label-for="input-7">
           <b-form-input
             id="apellido"
             v-model="form.apellido"
+            v-facade="'AAAAAAAAAAAAAAAAA'"
+            type = "text"
             required
             placeholder="Ingresar apellido"
           ></b-form-input>
@@ -61,7 +70,8 @@
             id="id_usuario"
             type="number"
             v-model="form.id_usuario"
-            required
+            v-facade="'##############'"
+            required    
             placeholder="Ingresar documento de identidad"
           ></b-form-input>
         </b-form-group>
@@ -69,10 +79,16 @@
         <b-form-group id="input-group-5" label="Celular:" label-for="input-5">
           <b-form-input
             id="celular"
+<<<<<<< HEAD
             type="text"
+=======
+>>>>>>> 0d2965bc9145a054f4a089f37452b8dc46c940ea
             v-model="form.celular"
+            type = "tel"
+            v-facade="'###-###-####'"
             required
             placeholder="Ingresar número de celular"
+            
           ></b-form-input>
         </b-form-group>
         <!-- b-form-select para los convenios disponibles -->

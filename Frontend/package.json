@@ -16,7 +16,8 @@
     "bootstrap-vue": "^2.0.0",
     "cors": "^2.8.5",
     "nuxt": "^2.0.0",
-    "veu": "^1.0.1"
+    "veu": "^1.0.1",
+    "vue-input-facade": "^1.1.5"
   },
   "devDependencies": {}
 }
