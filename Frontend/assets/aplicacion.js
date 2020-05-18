@@ -159,7 +159,6 @@ export default {
         nombre: document.getElementById('nombre').value,
         apellido: document.getElementById('apellido').value,
         correo: document.getElementById('correo').value,
-        id_usuario: document.getElementById('id_usuario').value,
         celular: document.getElementById('celular').value,
         id_convenio: document.getElementById('id_convenio').value,
         estado_aplicacion: "Enviado",
