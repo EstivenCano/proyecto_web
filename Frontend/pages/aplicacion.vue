@@ -28,11 +28,11 @@
       <b-form action="javascript:void(0)" @submit="guardarAplicacion" @reset="onReset" v-if="show">
         <!-- Opciones dentro del formulario -->
 
-        <b-form-group id="input-group-2" label="Nombre:" label-for="input-2">
+        <b-form-group id="input-group-2" label="Nombre(s):" label-for="input-2">
           <b-form-input id="nombre" v-model="form.nombre" required placeholder="Ingresar nombre"></b-form-input>
         </b-form-group>
 
-        <b-form-group id="input-group-7" label="Apellido:" label-for="input-7">
+        <b-form-group id="input-group-7" label="Apellido(s):" label-for="input-7">
           <b-form-input
             id="apellido"
             v-model="form.apellido"
@@ -56,9 +56,10 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group id="input-group-6" label="Documento de identidad:" label-for="input-6">
+        <b-form-group id="input-group-6" label="Documento de identidad:" label-for="input-6" v-if="!enEdicion">
           <b-form-input
             id="id_usuario"
+            type="number"
             v-model="form.id_usuario"
             required
             placeholder="Ingresar documento de identidad"
@@ -68,6 +69,7 @@
         <b-form-group id="input-group-5" label="Celular:" label-for="input-5">
           <b-form-input
             id="celular"
+            type="number"
             v-model="form.celular"
             required
             placeholder="Ingresar número de celular"
@@ -97,7 +99,7 @@
     <br />
 
     <!-- Tabla de aplicaciones -->
-    <b-table striped hover :items="aplicaciones">
+    <b-table striped hover :items="aplicaciones" :fields="fields">
       <template v-slot:cell(acciones)="row">
         <!-- Botones para editar y eliminar aplicaciones de la lista -->
         <b-button

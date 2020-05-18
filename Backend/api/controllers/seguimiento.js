@@ -11,22 +11,28 @@ let validarSeg = (seguimiento) => {
       mensaje: "El id del seguimiento es obligatorio",
     };
   }
-  if (!seguimiento.nombre) {
+  if (!seguimiento.id_aplicacion) {
     throw {
       ok: false,
-      mensaje: "El nombre del seguimiento es obligatorio",
+      mensaje: "El ID de la aplicación es obligatorio",
     };
   }
-  if (!seguimiento.descripcion) {
+  if (!seguimiento.fecha) {
     throw {
       ok: false,
-      mensaje: "La descripción del seguimiento es obligatoria",
+      mensaje: "La fecha del seguimiento es obligatoria",
     };
   }
-  if (!seguimiento.modulo) {
+  if (!seguimiento.comentario) {
     throw {
       ok: false,
-      mensaje: "El modulo del seguimiento es obligatorio",
+      mensaje: "El comentario del seguimiento es obligatorio",
+    };
+  }
+  if (!seguimiento.estado) {
+    throw {
+      ok: false,
+      mensaje: "El estado del seguimiento es obligatorio",
     };
   }
 };

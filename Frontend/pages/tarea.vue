@@ -33,10 +33,11 @@
         </b-form-group>
 
         <b-form-group label=" Descripción:" label-for="descripcion">
-          <b-form-input
+          <b-form-textarea
             class="form-control"
-            type="text"
             v-model="tarea.descripcion"
+            rows= "3"
+            max-rows="7"
             placeholder="Ingrese descripción de la tarea"
             id="descripcion"
             required

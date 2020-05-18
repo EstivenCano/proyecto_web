@@ -26,9 +26,10 @@
             class="form-control"
             type="number"
             v-model="seguimiento.id_aplicacion"
-            placeholder="Ingrese ID de la aplicación"
+            placeholder="ID de la aplicación seleccionada"
             id="id_app"
-            required
+            required 
+            disabled
             v-if="!enEdicion"
           />
         </b-form-group>
@@ -45,10 +46,11 @@
         </b-form-group>
 
         <b-form-group label=" Comentario:" label-for="comentario">
-          <b-form-input
+          <b-form-textarea
             class="form-control"
-            type="text"
             v-model="seguimiento.comentario"
+            rows= "3"
+            max-rows="7"
             placeholder="Ingrese comentario del  seguimiento"
             id="comentario"
             required
@@ -72,7 +74,9 @@
       </center>
       <!-- Lista de aplicaciones -->
       <b-table striped hover :items="lista_aplicaciones" :fields="fields2" v-if="cargada1">
-        <template>
+        <template v-slot:cell(acciones)="row">
+          <!-- Botones para editar seguimientos de la lista -->
+          <b-button size="sm" @click="cargarId(row)" class="mr-2">Realizar Seguimiento</b-button>
         </template>
       </b-table>
       <hr />

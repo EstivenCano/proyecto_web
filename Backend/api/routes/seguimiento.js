@@ -29,9 +29,9 @@ router.post("/seguimiento", (req, resp) => {
         let info_seguimiento = req.body;
         _controlador.validarSeg(info_seguimiento);
         _controlador.guardarSeg(info_seguimiento).then(respuestaDB => {
-            resp.send({ ok: true, mensaje: "Efectivamente guardada" });
+            resp.send({ ok: true, mensaje: "Efectivamente guardado" });
         }).catch(error => {
-            resp.send(error);
+            resp.send({ ok: false, mensaje: "Error al guardar" });
         });
 
     } catch (error) {
@@ -42,9 +42,9 @@ router.post("/seguimiento", (req, resp) => {
 router.delete("/seguimiento/:id", (req, resp) => {
     let id = req.params.id;
     _controlador.eliminarSeg(id).then((respuestaDB) => {
-        resp.send({ ok: true, mensaje: "Eliminada exitosamente " });
+        resp.send(respuestaDB);
     }).catch((error) => {
-        resp.send({ ok: false, mensaje: "Error al eliminar ", info: "" });
+        resp.send(error);
     });
 
 

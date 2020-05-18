@@ -14,7 +14,14 @@ export default {
         "estado",
         "acciones"
       ],
-      fields2: ["id", "nombre", "apellido", "correo", "id_convenio"],
+      fields2: [
+        "id",
+        "nombre",
+        "apellido",
+        "correo",
+        "id_convenio",
+        "acciones"
+      ],
       seguimiento: {
         id: "",
         id_aplicacion: "",
@@ -23,6 +30,15 @@ export default {
         archivo: null,
         estado: null,
         acciones: true
+      },
+      aplicacion: {
+        id: "",
+        nombre: "",
+        apellido: "",
+        correo: "",
+        id_usuario: "",
+        celular: "",
+        id_convenio: null
       },
       estados: [
         {
@@ -88,6 +104,13 @@ export default {
       this.$axios
         .post(url, tr)
         .then(respuesta => {
+          if (respuesta.data.ok == true) {
+            alert("Seguimiento Guardado con Éxito");
+          } else {
+            alert("Error: " + respuesta.data.mensaje);
+          }
+          console.log(respuesta);
+          
           this.cargarLS();
         })
         .catch(error => {});
@@ -107,6 +130,11 @@ export default {
       this.$axios
         .delete(url)
         .then(respuesta => {
+          if (respuesta.data.rowCount != 0) {
+            alert("Seguimiento Eliminado con Éxito");
+          } else {
+            alert("Seguimiento inexistente");
+          }
           this.cargarLS();
         })
         .catch(error => {});
@@ -121,6 +149,15 @@ export default {
       );
       this.enEdicion = true;
       this.seguimiento = Object.assign({}, aux);
+      alert("Ahora Puedes Modificar el Seguimiento");
+    },
+
+    cargarId({ item }) {
+      let aux = this.lista_aplicaciones.find(
+        aplicacion => aplicacion.id == item.id
+      );
+      this.seguimiento.id_aplicacion = aux.id;
+      alert("Ahora Puedes Realizar el Seguimiento");
     },
 
     actualizarSeg() {
@@ -130,7 +167,10 @@ export default {
       let url = "http://127.0.0.1:3001/seguimiento/" + id;
       this.$axios
         .put(url, tr)
-        .then(respuesta => {})
+        .then(respuesta => {
+          alert("Seguimiento Actualizado");
+          this.cargarLS();
+        })
         .catch(error => {});
       this.seguimiento = {
         id: "",
