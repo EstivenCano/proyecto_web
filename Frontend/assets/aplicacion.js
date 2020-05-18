@@ -18,6 +18,7 @@ export default {
       enEdicion: false,
       /*Array de aplicaciones*/
       aplicaciones: [],
+      fields: ["id", "nombre", "apellido", "correo", "celular", "id_convenio", "acciones"],
       /*Objeto de aplicaciones*/
       aplicacion: {
         id: "",

@@ -7,7 +7,7 @@
         <!-- Salto de linea -->
         <br />
         <!-- Titulo principal -->
-        <h1 style="font-size:200%;">Formulario de aplicación a convenio</h1>
+        <h1>Formulario de aplicación a convenio</h1>
         <!-- Imagen decorativa sobre formularios -->
         <img
           src="https://pngimage.net/wp-content/uploads/2018/06/formulario-png-5.png"
@@ -25,12 +25,7 @@
       <br />
 
       <!-- Formulario con los parametros indicados -->
-      <b-form
-        action="javascript:void(0)"
-        @submit="guardarAplicacion"
-        @reset="onReset"
-        v-if="show"
-      >
+      <b-form action="javascript:void(0)" @submit="guardarAplicacion" @reset="onReset" v-if="show">
         <!-- Opciones dentro del formulario -->
 
         <b-form-group id="input-group-2" label="Nombre:" label-for="input-2">
@@ -44,7 +39,7 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group id="input-group-7" label="Apellido:" label-for="input-7">
+        <b-form-group id="input-group-7" label="Apellido(s):" label-for="input-7">
           <b-form-input
             id="apellido"
             v-model="form.apellido"
@@ -70,13 +65,10 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group
-          id="input-group-6"
-          label="Documento de identidad:"
-          label-for="input-6"
-        >
+        <b-form-group id="input-group-6" label="Documento de identidad:" label-for="input-6" v-if="!enEdicion">
           <b-form-input
             id="id_usuario"
+            type="number"
             v-model="form.id_usuario"
             v-facade="'##############'"
             required    
@@ -96,40 +88,17 @@
           ></b-form-input>
         </b-form-group>
         <!-- b-form-select para los convenios disponibles -->
-        <b-form-group
-          id="input-group-3"
-          label="Tipo convenio:"
-          label-for="input-3"
-        >
-          <b-form-select
-            id="id_convenio"
-            v-model="form.id_convenio"
-            :options="convenios"
-            required
-          ></b-form-select>
+        <b-form-group id="input-group-3" label="Tipo convenio:" label-for="input-3">
+          <b-form-select id="id_convenio" v-model="form.id_convenio" :options="convenios" required></b-form-select>
         </b-form-group>
 
         <!-- Botones agrupados -->
         <b-form-group id="input-group-4"></b-form-group>
-        <b-button
-          type="submit"
-          variant="primary"
-          v-if="!enEdicion"
-          >Aceptar</b-button
-        >
-        <b-button
-          @click="actualizarAplicacion()"
-          variant="primary"
-          v-if="enEdicion"
-          >Actualizar</b-button
-        >
-        <b-button type="reset" v-if="!enEdicion" variant="danger"
-          >Limpiar</b-button
-        >
+        <b-button type="submit" variant="primary" v-if="!enEdicion">Aceptar</b-button>
+        <b-button @click="actualizarAplicacion()" variant="primary" v-if="enEdicion">Actualizar</b-button>
+        <b-button type="reset" v-if="!enEdicion" variant="danger">Limpiar</b-button>
 
-        <b-button @click="cancelarEdicion()" v-if="enEdicion" variant="danger"
-          >Cancelar</b-button
-        >
+        <b-button @click="cancelarEdicion()" v-if="enEdicion" variant="danger">Cancelar</b-button>
       </b-form>
     </b-container>
     <!-- Linea divisora -->
@@ -142,15 +111,16 @@
     <br />
 
     <!-- Tabla de aplicaciones -->
-    <b-table striped hover :items="aplicaciones">
+    <b-table striped hover :items="aplicaciones" :fields="fields">
       <template v-slot:cell(acciones)="row">
         <!-- Botones para editar y eliminar aplicaciones de la lista -->
-        <b-button size="sm" @click="modificarAplicacion(row)" class="mr-2" variant="warning"
-          >Modificar</b-button
-        >
-        <b-button size="sm" @click="eliminarAplicacion(row)" class="mr-2" variant="danger"
-          >Eliminar</b-button
-        >
+        <b-button
+          size="sm"
+          @click="modificarAplicacion(row)"
+          class="mr-2"
+          variant="warning"
+        >Modificar</b-button>
+        <b-button size="sm" @click="eliminarAplicacion(row)" class="mr-2" variant="danger">Eliminar</b-button>
       </template>
     </b-table>
   </div>

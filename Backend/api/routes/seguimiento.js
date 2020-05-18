@@ -1,11 +1,11 @@
 const express = require('express')
 const router = express.Router()
 
-const _controlador = require("../controllers/tarea");
+const _controlador = require("../controllers/seguimiento");
 
 
-router.get('/tarea', (req, resp) => {
-    _controlador.consultarTareas().then(respuestaDB => {
+router.get('/seguimiento', (req, resp) => {
+    _controlador.consultarSegs().then(respuestaDB => {
         let registros = respuestaDB.rows;
         resp.send(registros);
     }).catch(error => {
@@ -13,9 +13,9 @@ router.get('/tarea', (req, resp) => {
     })
 });
 
-router.get('/tarea/:id', (req, resp) => {
+router.get('/seguimiento/:id', (req, resp) => {
     let id = req.params.id;
-    _controlador.consultarTarea(id).then(respuestaDB => {
+    _controlador.consultarSeg(id).then(respuestaDB => {
         let registros = respuestaDB.rows;
         let mensaje = registros.length > 0 ? 'Consultado Efectivamente' : 'Sin registro';
         resp.send({ ok: true, mensaje, info: registros });
@@ -24,12 +24,12 @@ router.get('/tarea/:id', (req, resp) => {
     })
 });
 
-router.post("/tarea", (req, resp) => {
+router.post("/seguimiento", (req, resp) => {
     try {
-        let info_tarea = req.body;
-        _controlador.validarTarea(info_tarea);
-        _controlador.guardarTarea(info_tarea).then(respuestaDB => {
-            resp.send({ ok: true, mensaje: "Efectivamente guardada" });
+        let info_seguimiento = req.body;
+        _controlador.validarSeg(info_seguimiento);
+        _controlador.guardarSeg(info_seguimiento).then(respuestaDB => {
+            resp.send({ ok: true, mensaje: "Efectivamente guardado" });
         }).catch(error => {
             resp.send({ ok: false, mensaje: "Error al guardar" });
         });
@@ -39,9 +39,9 @@ router.post("/tarea", (req, resp) => {
     }
 });
 
-router.delete("/tarea/:id", (req, resp) => {
+router.delete("/seguimiento/:id", (req, resp) => {
     let id = req.params.id;
-    _controlador.eliminarTarea(id).then((respuestaDB) => {
+    _controlador.eliminarSeg(id).then((respuestaDB) => {
         resp.send(respuestaDB);
     }).catch((error) => {
         resp.send(error);
@@ -50,10 +50,10 @@ router.delete("/tarea/:id", (req, resp) => {
 
 });
 
-router.put("/tarea/:id", (req, resp) => {
+router.put("/seguimiento/:id", (req, resp) => {
     let id = req.params.id; 
-    let tarea = req.body;
-    _controlador.modificarTarea(tarea, id).then(respuestaDB => {
+    let seguimiento = req.body;
+    _controlador.modificarSeg(seguimiento, id).then(respuestaDB => {
         resp.send({ ok: true, mensaje: "Modificada exitosamente ", info: respuestaDB });
     }).catch(error => {
         resp.send({ ok: false, mensaje: "Error al modificar ", info: error });

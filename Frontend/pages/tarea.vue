@@ -4,12 +4,20 @@
       <br/>
       <center>
         <h1>Gestión de Tareas</h1>
+        <!-- Imagen decorativa-->
+        <img
+          src="https://pngimage.net/wp-content/uploads/2018/06/formulario-png-5.png"
+          fluid
+          alt="Responsive image"
+          height="100px"
+          width="100px"
+        />
       </center>
       <hr/>
       <!-- Formulario con los parametros indicados -->
       <b-form action="javascript:void(0)" @submit="crearTarea()" @reset="onReset" >
         <!-- Opciones dentro del formulario -->
-        <b-form-group label="ID:" label-for="id" v-if="!enEdicion">
+        <b-form-group label="Codigo:" label-for="id" v-if="!enEdicion">
           <b-form-input
             class="form-control"
             type="number"
@@ -33,10 +41,11 @@
         </b-form-group>
 
         <b-form-group label=" Descripción:" label-for="descripcion">
-          <b-form-input
+          <b-form-textarea
             class="form-control"
-            type="text"
             v-model="tarea.descripcion"
+            rows= "3"
+            max-rows="7"
             placeholder="Ingrese descripción de la tarea"
             id="descripcion"
             required
@@ -57,11 +66,12 @@
         <!-- Botones agrupados -->
         <b-button type="submit" variant="primary" v-if="!enEdicion">Crear Tarea</b-button>
         <b-button @click="actualizarTarea()" variant="success" v-else>Actualizar Tarea</b-button>
-        <b-button @click="cargarLS()" variant="danger">Cargar Lista</b-button>
+        <b-button @click="cargarLS()" variant="danger" v-if="!enEdicion">Cargar Lista</b-button>
+        <b-button @click="cancelarEdicion()" v-if="enEdicion" variant="danger">Cancelar</b-button>
       </b-form><br>
 
       <!-- Tabla de tareas -->
-      <b-table striped hover :items="lista_tareas" :fields="fields">
+      <b-table striped hover :items="lista_tareas" :fields="fields" v-if="cargada">
         <template v-slot:cell(acciones)="row">
           <!-- Botones para editar tareas de la lista -->
           <b-button size="sm" @click="cargarTarea(row)" class="mr-2">Modificar</b-button>
