@@ -64,7 +64,9 @@ export default {
     eliminarTarea() {
       let id = this.tarea.id;
       let url = "http://127.0.0.1:3001/tarea/" + id;
-      this.$axios
+      var confirmacion = confirm('¿Seguro que desea eliminar la tarea con el id ' +id + '?');
+      if (confirmacion == true) {
+        this.$axios
         .delete(url)
         .then(respuesta => {
           if (respuesta.data.rowCount != 0) {
@@ -75,6 +77,9 @@ export default {
           this.cargarLS();
         })
         .catch(error => {});
+      }else {
+        alert('La operación ha sido cancelada');
+      }
       this.tarea = {
         id: ""
       };

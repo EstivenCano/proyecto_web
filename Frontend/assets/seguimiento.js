@@ -127,7 +127,9 @@ export default {
     eliminarSeg() {
       let id = this.seguimiento.id;
       let url = "http://127.0.0.1:3001/seguimiento/" + id;
-      this.$axios
+      var confirmacion = confirm('¿Seguro que desea eliminar el seguimiento con el id ' +id + '?');
+      if (confirmacion == true) {
+        this.$axios
         .delete(url)
         .then(respuesta => {
           if (respuesta.data.rowCount != 0) {
@@ -138,6 +140,9 @@ export default {
           this.cargarLS();
         })
         .catch(error => {});
+      }else {
+        alert('La operación ha sido cancelada');
+      }      
       this.seguimiento = {
         id: ""
       };
