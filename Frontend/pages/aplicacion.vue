@@ -7,7 +7,7 @@
         <!-- Salto de linea -->
         <br />
         <!-- Titulo principal -->
-        <h1 style="font-size:200%;">Formulario de aplicación a convenio</h1>
+        <h1>Formulario de aplicación a convenio</h1>
         <!-- Imagen decorativa sobre formularios -->
         <img
           src="https://pngimage.net/wp-content/uploads/2018/06/formulario-png-5.png"

@@ -4,6 +4,14 @@
       <br />
       <center>
         <h1>Seguimiento de Aplicación</h1>
+        <!-- Imagen decorativa -->
+        <img
+          src="https://pngimage.net/wp-content/uploads/2018/06/formulario-png-5.png"
+          fluid
+          alt="Responsive image"
+          height="100px"
+          width="100px"
+        />
       </center>
       <hr />
       <!-- Formulario con los parametros indicados -->
