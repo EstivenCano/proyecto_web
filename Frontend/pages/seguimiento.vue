@@ -64,8 +64,9 @@
         <!-- Botones agrupados -->
         <b-button type="submit" variant="primary" v-if="!enEdicion">Crear seguimiento</b-button>
         <b-button @click="actualizarSeg()" variant="success" v-else>Actualizar seguimiento</b-button>
-        <b-button @click="cargarLSA()" variant="danger">Cargar Aplicaciones</b-button>
-        <b-button @click="cargarLS()" variant="success">Cargar Seguimientos</b-button>
+        <b-button @click="cargarLSA()" variant="danger" v-if="!enEdicion">Cargar Aplicaciones</b-button>
+        <b-button @click="cargarLS()" variant="success" v-if="!enEdicion">Cargar Seguimientos</b-button>
+        <b-button @click="cancelarEdicion()" v-if="enEdicion" variant="danger">Cancelar</b-button>
       </b-form>
       <br />
 

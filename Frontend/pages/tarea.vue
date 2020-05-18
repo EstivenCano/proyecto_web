@@ -58,7 +58,8 @@
         <!-- Botones agrupados -->
         <b-button type="submit" variant="primary" v-if="!enEdicion">Crear Tarea</b-button>
         <b-button @click="actualizarTarea()" variant="success" v-else>Actualizar Tarea</b-button>
-        <b-button @click="cargarLS()" variant="danger">Cargar Lista</b-button>
+        <b-button @click="cargarLS()" variant="danger" v-if="!enEdicion">Cargar Lista</b-button>
+        <b-button @click="cancelarEdicion()" v-if="enEdicion" variant="danger">Cancelar</b-button>
       </b-form><br>
 
       <!-- Tabla de tareas -->

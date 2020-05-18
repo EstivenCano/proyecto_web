@@ -111,6 +111,14 @@ export default {
         modulo: "",
         acciones: true
       };
+    },
+
+    cancelarEdicion(){
+      this.tarea.id = "";
+      this.tarea.nombre = "";
+      this.tarea.descripcion = "";
+      this.tarea.modulo = "";
+      this.enEdicion = false;
     }
   }
 };

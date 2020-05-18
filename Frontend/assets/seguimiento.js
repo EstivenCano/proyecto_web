@@ -65,7 +65,7 @@ export default {
       this.seguimiento.id_aplicacion = "";
       this.seguimiento.fecha = "";
       this.seguimiento.comentario = "";
-      this.seguimiento.estado = "";
+      this.seguimiento.estado = null;
     },
 
     cargarLS() {
@@ -119,7 +119,7 @@ export default {
         id_aplicacion: "",
         fecha: "",
         comentario: "",
-        estado: "",
+        estado: null,
         acciones: true
       };
     },
@@ -182,9 +182,18 @@ export default {
         id_aplicacion: "",
         fecha: "",
         comentario: "",
-        estado: "",
+        estado: null,
         acciones: true
       };
+    },
+
+    cancelarEdicion(){
+      this.seguimiento.id = "";
+      this.seguimiento.id_aplicacion = "";
+      this.seguimiento.fecha = "";
+      this.seguimiento.comentario = "";
+      this.seguimiento.estado = null;
+      this.enEdicion = false;
     }
   }
 };
