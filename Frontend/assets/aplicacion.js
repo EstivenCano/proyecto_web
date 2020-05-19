@@ -2,9 +2,11 @@ import { InputFacade, facade, filter } from 'vue-input-facade';
 
 export default {
   beforeMount() {
+    //Limpia los campos del formulario para evitar errores de validación
+    this.limpiarLista();
     //Carga las aplicaciones antes de ser llamadas por la página.
     this.cargarLista();
-    this.limpiarLista();
+    
   },
 
   components: { InputFacade },
@@ -18,6 +20,9 @@ export default {
       enEdicion: false,
       /*Array de aplicaciones*/
       aplicaciones: [],
+      /*Item temporal donde se guardan los datos de una fila de la lista */
+      item:{},
+      /*Campos mostrados en la lista de aplicaciones */
       fields: ["id", "nombre", "apellido", "correo", "celular", "id_convenio", "acciones"],
       /*Objeto de aplicaciones*/
       aplicacion: {
@@ -41,7 +46,6 @@ export default {
         acciones: true
 
       },
-
       /*Opciones de convenio en la lista desplegable*/
       convenios: [{
           text: "Selecciona un convenio",
@@ -62,6 +66,7 @@ export default {
       show: true
     };
   },
+
   /*Métodos*/
   methods: {
 
@@ -83,7 +88,7 @@ export default {
     },
 
     //Carga la lista de las aplicaciones desde la base de datos
-    cargarLista() {
+    async cargarLista() {
       let url = 'http://localhost:3001/aplicacion';
       this.loading = true;
       //Trae todos los marcadores desde la base de datos.
@@ -144,7 +149,6 @@ export default {
       this.form.apellido = item.apellido;
       this.form.correo = item.correo;
       this.form.celular = item.celular;
-      this.form.id_usuario = item.id_usuario;
       this.form.id_convenio = item.id_convenio;
       this.item = item;
       this.enEdicion = true;
@@ -187,29 +191,40 @@ export default {
 
     //Cancela la edición de la aplicación.
     cancelarEdicion(){
-      this.form.id = "";
-      this.form.nombre = "";
-      this.form.apellido = "";
-      this.form.correo = "";
-      this.form.celular = "";
-      this.form.id_usuario = "";
+
+      this.form.id = '';
+      this.form.nombre = '';
+      this.form.apellido = '';
+      this.form.correo = '';
+      this.form.celular = '';
+      this.form.id_usuario ='';
       this.form.id_convenio = null;
       this.enEdicion =false;
       this.item = {};
+      this.refrescarFormulario();
 
     },
 
     //Limpia los campos del formulario.
     limpiarLista() {
-      this.form.id = "";
-      this.form.nombre = "";
-      this.form.apellido = "";
-      this.form.correo = "";
-      this.form.celular = "";
-      this.form.id_usuario = "";
+      this.form.id = '';
+      this.form.nombre = '';
+      this.form.apellido = '';
+      this.form.correo = '';
+      this.form.celular = '';
+      this.form.id_usuario = '';
       this.form.id_convenio = null;
+      this.refrescarFormulario();
+ 
     },
 
+    refrescarFormulario(){
+      this.show = false;
+      this.$nextTick(() => {
+        this.show = true;
+      });
+
+    },
     //Ordenar array de aplicaciones para ser enlistados.
     ordenarAsc(p_array_json, p_key) {
       p_array_json.sort(function (a, b) {

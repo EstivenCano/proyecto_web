@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div style="background-color = black">
       <b-navbar toggleable="lg" type="dark" variant="dark">
         <img
           src="https://pqrsf.udem.edu.co/img/logo.png"

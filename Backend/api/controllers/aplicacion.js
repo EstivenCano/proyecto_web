@@ -5,8 +5,6 @@
 //Importar servicio de postgres
 const ServicioPg = require('../services/postgres');
 
-
-
 /**
  * Validar la información de la aplicación
  * @param {*} aplicacion json de la aplicación
@@ -89,6 +87,7 @@ let consultarAplicaciones = async (filtros) => {
 
   let servicio = new ServicioPg();
   //filtro 
+
   let _where = "";
   let llaves = Object.keys(filtros);
   if (llaves.length < 1) {
