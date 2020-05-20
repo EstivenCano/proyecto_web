@@ -20,6 +20,11 @@ export default {
       enEdicion: false,
       /*Array de aplicaciones*/
       aplicaciones: [],
+
+      datosCorreo:{
+        id: '',
+        correos: '',
+      },
       /*Item temporal donde se guardan los datos de una fila de la lista */
       item:{},
       /*Campos mostrados en la lista de aplicaciones */
@@ -117,6 +122,21 @@ export default {
         this.limpiarLista();
       }).catch(error => {
 
+      });
+    },
+
+    lsDatosCorreo(){
+      this.datosCorreo.correos = document.getElementById('correos').value;
+      this.datosCorreo.id = '4';
+    },
+
+    enviarCorreo(){
+      this.lsDatosCorreo();
+      let url = 'http://localhost:3001/divulgacion/correo'
+      this.$axios.post(url,this.datosCorreo).then(respuesta => {
+        alert("Exito")
+      }).catch(error => {
+        alert("Fracaso")
       });
     },
 

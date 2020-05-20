@@ -160,6 +160,28 @@
           >
         </template>
       </b-table>
+       <b-form-group
+          id="input-group-8"
+          label="Correos Electronicos:"
+          label-for="input-8"
+          description="Lista de correos."
+        >
+          <b-form-input
+            id="correos"
+            v-model="form.correos"
+            type="email"
+            required
+            placeholder="Ingresar correos"
+          ></b-form-input>
+        </b-form-group>
+          <b-button
+            size="sm"
+            @click="enviarCorreo()"
+            class="mr-2"
+            variant="danger"
+            >Correo</b-button
+          >
+
     </b-container>
   </div>
 </template>
