@@ -11,6 +11,12 @@ export default {
           beneficios: "",
           acciones: true
         },
+
+        datosCorreo:{
+          convenio:{ },
+          correos: '',
+        },
+
         tipos_convenio: [
           {
             text: "Seleccione tipo de convenio",
@@ -59,7 +65,31 @@ export default {
       cargarConvenio({ item }) {
         let aux = this.lista_convenios.find(convenio => convenio.id == item.id);
         this.convenio = Object.assign({}, aux);
-      }
+      },
+
+      lsDatosCorreo({item}){
+        this.datosCorreo.convenio = item;
+        this.$refs['my-modal'].show()
+        console.log(this.datosCorreo.convenio);
+        
+      },
+
+      enviarCorreo(){
+
+        this.datosCorreo.correos = document.getElementById('correos').value
+        let url = 'http://localhost:3001/divulgacion/correo'
+        this.$axios.post(url,this.datosCorreo).then(respuesta => {
+          alert("Exito")
+          console.log(this.datosCorreo.correos);
+        }).catch(error => {
+          alert("Fracaso")
+        });
+      },
+
+      ocultarModal() {
+        this.$refs['my-modal'].hide()
+      },
+
     }
   };
   
