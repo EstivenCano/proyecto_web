@@ -125,11 +125,13 @@ export default {
       });
     },
 
+    //Método de prueba de divulgación
     lsDatosCorreo(){
       this.datosCorreo.correos = document.getElementById('correos').value;
       this.datosCorreo.id = '4';
     },
 
+    //Método de prueba Envio de correo
     enviarCorreo(){
       this.lsDatosCorreo();
       let url = 'http://localhost:3001/divulgacion/correo'

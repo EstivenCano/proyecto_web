@@ -69,7 +69,9 @@
 
       <b-table striped hover :items="lista_convenios" :fields="fields3" v-if="cargada3">
         <template v-slot:cell(acciones)="row">
-          <b-button size="sm" @click="cargarConvenio(row)" class="mr-2">Divulgar</b-button>
+          <b-button size="sm" @click="lsDatosCorreo(row)" class="mr-2"
+            >Divulgar</b-button
+          >
         </template>
       </b-table>
       <br />
