@@ -7,23 +7,17 @@
       </center>
       <hr />
 
-      <b-form action="javascript:void(0)" @submit="cargarConvenio()" @reset="onReset">
-        <b-form-group label="Filtrar por tipo de convenio:" label-for="filtro1" v-if="!enEdicion">
-          <b-form-input
-            class="form-control"
-            type="number"
-            v-model="tarea.id"
-            placeholder="Ingrese ID de la tarea"
-            id="id"
-            required
-            v-if="!enEdicion"
-          />
+      <b-form action="javascript:void(0)" @submit="cargarLS()" @reset="onReset" id="f1">
+        
+        <b-form-group id="estado" label="Filtrar por tipo de convenio:" label-for="filtro1">
+          <b-form-select id="tipo_convenio" v-model="convenio.tipo_convenio" :options="tipos_convenio" required></b-form-select>
         </b-form-group>
 
         <center>
-        <b-button size="sm" type="submit" variant="success" v-if="!enEdicion">Cargar Lista 1</b-button>
+        <b-button size="sm" type="submit" variant="success">Filtrar por tipo de Convenio</b-button>
         </center> 
       </b-form>
+
       <br />
 
       <b-table striped hover :items="lista_convenios" :fields="fields" v-if="cargada">
