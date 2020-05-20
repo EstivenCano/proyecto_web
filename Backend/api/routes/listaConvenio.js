@@ -24,4 +24,26 @@ router.get('/listaConvenio/:tipo', (req, resp) => {
     })
 })
 
+router.get('/listaConvenioPais/:pais', (req, resp) => {
+    let pais = req.params.pais;
+    _controlador.consultarConvenioPais(pais).then(respuestaDB => {
+        let registros = respuestaDB.rows;
+        let mensaje = registros.length > 0 ? 'Consultado Efectivamente' : 'Sin registros';
+        resp.send({ ok: true, mensaje, info: registros });
+    }).catch(error => {
+        resp.send(error);
+    })
+})
+
+router.get('/listaConvenioEntidad/:entidad', (req, resp) => {
+    let entidad = req.params.entidad;
+    _controlador.consultarConvenioEntidad(entidad).then(respuestaDB => {
+        let registros = respuestaDB.rows;
+        let mensaje = registros.length > 0 ? 'Consultado Efectivamente' : 'Sin registros';
+        resp.send({ ok: true, mensaje, info: registros });
+    }).catch(error => {
+        resp.send(error);
+    })
+})
+
 module.exports = router;

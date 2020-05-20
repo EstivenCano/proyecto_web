@@ -17,12 +17,8 @@
           width="100px"
         />
       </center>
-
-      <!-- Salto de linea -->
-      <br />
       <!-- Linea divisora -->
       <hr />
-      <br />
 
       <!-- Formulario con los parametros indicados -->
       <b-form
