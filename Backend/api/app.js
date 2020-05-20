@@ -18,7 +18,8 @@ const rutas_aplicacion = require("./routes/aplicacion");
 const rutas_tarea = require("./routes/tarea");
 const rutas_seguimiento = require("./routes/seguimiento");
 const rutas_divulgacion = require("./routes/divulgacion");
-app.use(rutas_aplicacion, rutas_tarea, rutas_seguimiento,rutas_divulgacion);
+const rutas_convenio = require("./routes/listaConvenio");
+app.use(rutas_aplicacion, rutas_tarea, rutas_seguimiento, rutas_convenio,rutas_divulgacion);
 
 //Puerto
 const port = 3001;

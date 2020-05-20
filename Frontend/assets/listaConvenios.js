@@ -1,17 +1,34 @@
 export default {
     data() {
       return {
-        enEdicion: false,
         cargada: false,
-        lista_tareas: [],
-        fields: ["id", "nombre", "descripcion", "modulo", "acciones"],
-        tarea: {
+        lista_convenios: [],
+        fields: ["id", "tipo_convenio", "descripcion_iniciativa", "beneficios", "acciones"],
+        convenio: {
           id: "",
-          nombre: "",
-          descripcion: "",
-          modulo: "",
+          tipo_convenio: null,
+          descripcion_iniciativa: "",
+          beneficios: "",
           acciones: true
         },
+        tipos_convenio: [
+          {
+            text: "Seleccione tipo de convenio",
+            value: null
+          },
+          {
+            text: "Estudio",
+            value: "Estudio"
+          },
+          {
+            text: "Idiomas",
+            value: "Idiomas"
+          },
+          {
+            text: "Deporte",
+            value: "Deporte"
+          }
+        ],
         show: true
       };
     },
@@ -19,18 +36,19 @@ export default {
       onReset(evt) {
         evt.preventDefault();
         // Reset our form values
-        this.tarea.id = "";
-        this.tarea.nombre = "";
-        this.tarea.descripcion = "";
-        this.tarea.modulo = "";
+        this.convenio.id = "";
+        this.convenio.tipo_convenio = "";
+        this.convenio.descripcion_iniciativa = "";
+        this.convenio.beneficios = "";
       },
   
       cargarLS() {
-        let url = "http://127.0.0.1:3001/tarea";
+        let tipo = this.convenio.tipo_convenio;
+        let url = "http://127.0.0.1:3001/listaConvenio/" + tipo;
         this.$axios
           .get(url)
           .then(respuesta => {
-            this.lista_tareas = respuesta.data;
+            this.lista_convenios = respuesta.data.info;
             this.cargada = true;
           })
           .catch(error => {
@@ -38,87 +56,9 @@ export default {
           });
       },
   
-      crearTarea() {
-        let tr = this.tarea;
-        let url = "http://127.0.0.1:3001/tarea";
-        this.$axios
-          .post(url, tr)
-          .then(respuesta => {
-            if (respuesta.data.ok == true) {
-              alert("Tarea Guardada con Éxito");
-            } else {
-              alert("Error al Guardar Tarea");
-            }
-            this.cargarLS();
-          })
-          .catch(error => {});
-        this.tarea = {
-          id: "",
-          nombre: "",
-          descripcion: "",
-          modulo: "",
-          acciones: true
-        };
-      },
-  
-      eliminarTarea() {
-        let id = this.tarea.id;
-        let url = "http://127.0.0.1:3001/tarea/" + id;
-        var confirmacion = confirm('¿Seguro que desea eliminar la tarea con el id ' +id + '?');
-        if (confirmacion == true) {
-          this.$axios
-          .delete(url)
-          .then(respuesta => {
-            if (respuesta.data.rowCount != 0) {
-              alert("Tarea Eliminada con Éxito");
-            } else {
-              alert("Tarea inexistente");
-            }
-            this.cargarLS();
-          })
-          .catch(error => {});
-        }else {
-          alert('La operación ha sido cancelada');
-        }
-        this.tarea = {
-          id: ""
-        };
-      },
-  
-      cargarTarea({ item }) {
-        let aux = this.lista_tareas.find(tarea => tarea.id == item.id);
-        this.enEdicion = true;
-        this.tarea = Object.assign({}, aux);
-        alert("Ahora Puedes Modificar la Tarea");
-      },
-  
-      actualizarTarea() {
-        this.enEdicion = false;
-        let id = this.tarea.id;
-        let tr = this.tarea;
-        let url = "http://127.0.0.1:3001/tarea/" + id;
-        this.$axios
-          .put(url, tr)
-          .then(respuesta => {
-            alert("Tarea Actualizada");
-            this.cargarLS();
-          })
-          .catch(error => {});
-        this.tarea = {
-          id: "",
-          nombre: "",
-          descripcion: "",
-          modulo: "",
-          acciones: true
-        };
-      },
-  
-      cancelarEdicion(){
-        this.tarea.id = "";
-        this.tarea.nombre = "";
-        this.tarea.descripcion = "";
-        this.tarea.modulo = "";
-        this.enEdicion = false;
+      cargarConvenio({ item }) {
+        let aux = this.lista_convenios.find(convenio => convenio.id == item.id);
+        this.convenio = Object.assign({}, aux);
       }
     }
   };
