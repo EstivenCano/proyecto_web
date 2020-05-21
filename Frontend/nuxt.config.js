@@ -28,7 +28,10 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    { src: "@/plugins/vue-cookie" },
+    { src: "@/plugins/vue-input-facade" }
   ],
+  
   /*
   ** Nuxt.js dev-modules
   */
@@ -40,7 +43,8 @@ export default {
   modules: [
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    'nuxt-sweetalert2'
   ],
   /*
   ** Build configuration

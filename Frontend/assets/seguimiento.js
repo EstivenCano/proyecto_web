@@ -1,7 +1,3 @@
-import Vue from "vue";
-import VueSimpleAlert from "vue-simple-alert";
-Vue.use(VueSimpleAlert);
-
 export default {
   data() {
     return {
@@ -108,14 +104,14 @@ export default {
         .post(url, tr)
         .then(respuesta => {
           if (respuesta.data.ok == true) {
-            this.$fire({
+            this.$swal.fire({
               title: 'Éxito!',
               text: 'El seguimiento ha sido guardado exitosamente.',
               type: 'success',
               timer: 2500
             })
           } else {
-            this.$fire({
+            this.$swal.fire({
               title: 'Error',
               text: 'No ha sido posible crear el seguimiento.',
               type: 'error',
@@ -141,7 +137,7 @@ export default {
       let id = this.seguimiento.id;
       let url = "https://gestion-movilidad-api.herokuapp.com/seguimiento/" + id;
 
-      this.$fire({
+      this.$swal.fire({
         title: "Precaución",
         text: "¿Desea eliminar el seguimiento?",
         icon: 'warning',
@@ -156,14 +152,14 @@ export default {
             .delete(url)
             .then(respuesta => {
               if (respuesta.data.rowCount != 0) {
-                this.$fire({
+                this.$swal.fire({
                   title: 'Éxito!',
                   text: 'Seguimiento eliminado exitosamente.',
                   type: 'success',
                   timer: 2500
                 })
               } else {
-                this.$fire({
+                this.$swal.fire({
                   title: 'Error',
                   text: 'Seguimiento inexistente.',
                   type: 'success',
@@ -176,7 +172,7 @@ export default {
 
         } else {
 
-          this.$fire({
+          this.$swal.fire({
             title: 'Cancelada',
             text: 'La operación ha sido cancelada',
             type: 'error',
@@ -198,7 +194,7 @@ export default {
       );
       this.enEdicion = true;
       this.seguimiento = Object.assign({}, aux);
-      this.$fire({
+      this.$swal.fire({
         title: 'Modificación',
         text: 'Ahora puedes modificar el seguimiento',
         timer: 1500
@@ -213,7 +209,7 @@ export default {
         aplicacion => aplicacion.id == item.id
       );
       this.seguimiento.id_aplicacion = aux.id;
-      this.$fire({
+      this.$swal.fire({
         title: 'Cargar',
         text: 'Ahora puedes realizar el seguimiento',
         timer: 1500
@@ -228,7 +224,7 @@ export default {
       this.$axios
         .put(url, tr)
         .then(respuesta => {
-          this.$fire({
+          this.$swal.fire({
             title: 'Actualización',
             text: 'Seguimiento actualizado correctamente',
             type: 'success',

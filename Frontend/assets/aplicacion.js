@@ -1,14 +1,3 @@
-import {
-  InputFacade,
-  facade,
-  filter
-} from 'vue-input-facade';
-import Vue from "vue";
-import VueCookies from "vue-cookies";
-import VueSimpleAlert from "vue-simple-alert";
-Vue.use(VueSimpleAlert);
-Vue.use(VueCookies);
-
 export default {
   beforeMount() {
     //Limpia los campos del formulario para evitar errores de validación
@@ -18,16 +7,6 @@ export default {
     //Verifica si existe cookies guardadas
     this.verificarCookies();
 
-  },
-
-  components: {
-    InputFacade
-  },
-  directives: {
-    facade
-  },
-  filters: {
-    facade: filter
   },
 
   data() {
@@ -117,7 +96,7 @@ export default {
       let url = 'https://gestion-movilidad-api.herokuapp.com/aplicacion'
       this.$axios.post(url, this.datosFormulario()).then(respuesta => {
         //Recarga los marcadores de la base de datos.
-        this.$fire({
+        this.$swal.fire({
           title: "Aplicación guardada",
           text: "La aplicación fue guardada con exito",
           type: "success",
@@ -147,10 +126,9 @@ export default {
     }) {
       let url = `https://gestion-movilidad-api.herokuapp.com/aplicacion/${item.id}`
 
-      this.$fire({
+      this.$swal.fire({
         title: "Precaución",
         text: "¿Desea eliminar la aplicación?",
-        icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Si, Eliminar',
         cancelButtonText: 'No, Cancelar',
@@ -160,14 +138,14 @@ export default {
           this.$axios.delete(url, this.datosFormulario()).then(respuesta => {
             this.cargarLista();
           }).catch(error => {});
-          this.$fire({
+          this.$swal.fire({
             title: 'Eliminada!',
             text: 'La aplicación ha sido eliminada correctamente.',
             type: 'success',
             timer: 3000
           })
         } else {
-          this.$fire({
+          this.$swal.fire({
             title: 'Cancelada',
             text: 'La operación ha sido cancelada',
             type: 'error',
@@ -214,7 +192,7 @@ export default {
       let url = `https://gestion-movilidad-api.herokuapp.com/aplicacion/${this.item.id}`
       this.$axios.put(url, actualizado).then(respuesta => {
         //Alerta de éxito.
-        this.$fire({
+        this.$swal.$fire({
           title: 'Actualizada!',
           text: 'La aplicación ha sido actualizada correctamente.',
           type: 'success',
@@ -228,7 +206,7 @@ export default {
         this.cancelarEdicion();
       }).catch(error => {
         //Alerta de error.
-        this.$fire({
+        this.$swal.fire({
           title: 'Error',
           text: 'No pudo actualizarse la aplicación',
           type: 'error',

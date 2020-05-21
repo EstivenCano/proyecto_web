@@ -1,6 +1,3 @@
-import Vue from "vue";
-import VueSimpleAlert from "vue-simple-alert";
-Vue.use(VueSimpleAlert);
 
 export default {
   data() {
@@ -49,14 +46,14 @@ export default {
         .post(url, tr)
         .then(respuesta => {
           if (respuesta.data.ok == true) {
-            this.$fire({
+            this.$swal.fire({
               title: 'Éxito!',
               text: 'Tarea guardada exitosamente.',
               type: 'success',
               timer: 2500
             })         
           } else {
-            this.$fire({
+            this.$swal.fire({
               title: 'Error',
               text: 'No se pudo guardar la tarea.',
               type: 'success',
@@ -78,10 +75,8 @@ export default {
     eliminarTarea() {
       let id = this.tarea.id;
       let url = "https://gestion-movilidad-api.herokuapp.com/tarea/" + id;
-
-
-      
-      this.$fire({
+  
+      this.$swal.fire({
         title: "Precaución",
         text: "¿Desea eliminar la tarea?",
         icon: 'warning',
@@ -95,14 +90,14 @@ export default {
         .delete(url)
         .then(respuesta => {
           if (respuesta.data.rowCount != 0) {
-            this.$fire({
+            this.$swal.fire({
               title: 'Eliminada!',
               text: 'La tarea ha sido eliminada correctamente.',
               type: 'success',
               timer: 3000
             })
           } else {
-            this.$fire({
+            this.$swal.fire({
               title: 'Error',
               text: 'Tarea inexistente.',
               type: 'error',
@@ -114,7 +109,7 @@ export default {
         .catch(error => {});
           
         } else {
-          this.$fire({
+          this.$swal.fire({
             title: 'Cancelada',
             text: 'La operación ha sido cancelada',
             type: 'error',
@@ -132,7 +127,7 @@ export default {
       let aux = this.lista_tareas.find(tarea => tarea.id == item.id);
       this.enEdicion = true;
       this.tarea = Object.assign({}, aux);
-      this.$fire({
+      this.$swal.fire({
         title: 'Mensaje',
         text: 'Anora puedes modificar la tarea.',
         timer: 1500
@@ -147,7 +142,7 @@ export default {
       this.$axios
         .put(url, tr)
         .then(respuesta => {
-          this.$fire({
+          this.$swal.fire({
             title: 'Actualización',
             text: 'Tarea actualizada exitosamente.',
             type: 'success',

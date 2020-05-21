@@ -1,9 +1,3 @@
-import Vue from "vue";
-import VueCookies from "vue-cookies";
-import VueSimpleAlert from "vue-simple-alert";
-Vue.use(VueSimpleAlert);
-Vue.use(VueCookies);
-
 export default {
   data() {
     return {
@@ -240,7 +234,7 @@ export default {
       this.$axios
         .post(url, this.datosCorreo)
         .then(respuesta => {
-          this.$fire({
+          this.$swal.fire({
             title: 'Exito!',
             text: 'La aplicación fue enviada a los correos indicados.',
             type: 'success',
@@ -249,7 +243,7 @@ export default {
           //console.log(this.datosCorreo.correos);
         })
         .catch(error => {
-          this.$fire({
+          this.$swal.fire({
             title: 'Error',
             text: 'No se pudo enviar la aplicación seleccionada',
             type: 'error',
@@ -263,23 +257,22 @@ export default {
     },
 
     enviarCookies({item}){
-
-      this.$fire({
+      this.$swal.fire({
         title: "Convenio",
         text: "¿Desea aplicar para el convenio?",
-        icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Si',
         cancelButtonText: 'No',
         reverseButtons: true
       }).then(r => {
         if (r.value) {
-          
           this.$cookies.set('convenio',item);   
-          window.open('https://gestion-movilidad-udem.herokuapp.com/aplicacion','_self')
+          window.location.replace("https://gestion-movilidad-udem.herokuapp.com/aplicacion");
+          //window.open('https://gestion-movilidad-udem.herokuapp.com/listaConvenios', '_self');
+
 
         } else {
-          this.$fire({
+          this.$swal.fire({
             title: 'Cancelada',
             text: 'La operación ha sido cancelada',
             type: 'error',

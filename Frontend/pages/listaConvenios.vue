@@ -166,7 +166,8 @@
             @click="enviarCookies(row)"
             class="mr-2"
             variant="success"
-            >Aplicar</b-button
+            >Aplicar
+            </b-button
           >
         </template>
       </b-table>
