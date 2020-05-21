@@ -13,6 +13,13 @@ router.get('/listaConvenio', (req, resp) => {
     })
 });
 
+router.get('/listaConvenio/aplicacion', (req, resp) => {
+  
+    window.open('https://localhost:3001/aplicacion','_self')
+    //window.open('https://gestion-movilidad-udem.herokuapp.com/aplicacion','_self')
+
+});
+
 router.get('/listaConvenio/:tipo', (req, resp) => {
     let tipo = req.params.tipo;
     _controlador.consultarConvenio(tipo).then(respuestaDB => {

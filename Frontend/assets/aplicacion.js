@@ -1,4 +1,7 @@
 import { InputFacade, facade, filter } from 'vue-input-facade';
+import Vue from "vue";
+import VueCookies from "vue-cookies";
+Vue.use(VueCookies);
 
 export default {
   beforeMount() {
@@ -6,6 +9,8 @@ export default {
     this.limpiarLista();
     //Carga las aplicaciones antes de ser llamadas por la página.
     this.cargarLista();
+
+    this.verificarCookies();
     
   },
 
@@ -37,7 +42,7 @@ export default {
         correo: "",
         id_usuario: "",
         celular: "",
-        id_convenio: null,
+        id_convenio: "",
         acciones: true
       },
       /*Parametros de formulario*/
@@ -47,27 +52,11 @@ export default {
         correo: "",
         id_usuario: "",
         celular: "",
-        id_convenio: null,
+        id_convenio: "",
         acciones: true
 
       },
-      /*Opciones de convenio en la lista desplegable*/
-      convenios: [{
-          text: "Selecciona un convenio",
-          value: null
-        },
-        {
-          text: "Movilidad",
-          value: 1
-        }, {
-          text: "Intercambio",
-          value: 2
-        },
-        {
-          text: "Investigación",
-          value: 3
-        }
-      ],
+
       show: true
     };
   },
@@ -94,7 +83,7 @@ export default {
 
     //Carga la lista de las aplicaciones desde la base de datos
     async cargarLista() {
-      let url = 'http://localhost:3001/aplicacion';
+      let url = 'https://gestion-movilidad-api.herokuapp.com/aplicacion';
       this.loading = true;
       //Trae todos los marcadores desde la base de datos.
       this.$axios
@@ -113,40 +102,28 @@ export default {
 
     //Guarda la aplicación que fue ingresada en la página.
     guardarAplicacion() {
-      let url = 'http://localhost:3001/aplicacion'
+      let url = 'https://gestion-movilidad-api.herokuapp.com/aplicacion'
       this.$axios.post(url, this.datosFormulario()).then(respuesta => {
         //Recarga los marcadores de la base de datos.
         alert("Aplicación guardada con éxito")
         this.cargarLista();
         //Reestablece los campos del formulario.
         this.limpiarLista();
-      }).catch(error => {
 
+        window.open('https://gestion-movilidad-udem.herokuapp.com/listaConvenios','_self');
       });
     },
 
-    //Método de prueba de divulgación
-    lsDatosCorreo(){
-      this.datosCorreo.correos = document.getElementById('correos').value;
-      this.datosCorreo.id = '4';
-    },
-
-    //Método de prueba Envio de correo
-    enviarCorreo(){
-      this.lsDatosCorreo();
-      let url = 'http://localhost:3001/divulgacion/correo'
-      this.$axios.post(url,this.datosCorreo).then(respuesta => {
-        alert("Exito")
-      }).catch(error => {
-        alert("Fracaso")
-      });
+    verificarCookies(){
+      let convenio = this.$cookies.get('convenio');
+      this.form.id_convenio = convenio.id
     },
 
     //Elimina el marcador seleccionado. 
     eliminarAplicacion({
       item
     }) {
-      let url = `http://localhost:3001/aplicacion/${item.id}`
+      let url = `https://gestion-movilidad-api.herokuapp.com/aplicacion/${item.id}`
 
       var opcion = confirm(`¿Desea eliminar la aplicación ${item.id}?`);
       if (opcion == true) {
@@ -192,7 +169,7 @@ export default {
       }
 
       //Actualiza el elemento con el id ingresado en la url.
-      let url = `http://localhost:3001/aplicacion/${this.item.id}`
+      let url = `https://gestion-movilidad-api.herokuapp.com/aplicacion/${this.item.id}`
       this.$axios.put(url, actualizado).then(respuesta => {
         //Alerta de éxito.
         alert(`La aplicación ${this.item.id} ha sido actualizada`);
@@ -258,6 +235,7 @@ export default {
       evt.preventDefault();
       alert(JSON.stringify(this.form));
       this.guardarAplicacion();
+      //this.$cookies.remove('convenio');
     },
     /*Limpia los campos del formulario*/
     onReset(evt) {

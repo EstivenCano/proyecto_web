@@ -48,18 +48,21 @@
       <b-table striped hover :items="lista_convenios" :fields="fields1" v-if="cargada1">
         <template v-slot:cell(acciones)="row">
           <b-button size="sm" @click="lsDatosCorreo(row)" class="mr-2">Divulgar</b-button>
+          <b-button size="sm" @click="enviarCookies(row)" class="mr-2">Aplicar</b-button>
         </template>
       </b-table>
 
       <b-table striped hover :items="lista_convenios" :fields="fields2" v-if="cargada2">
         <template v-slot:cell(acciones)="row">
           <b-button size="sm" @click="lsDatosCorreo(row)" class="mr-2">Divulgar</b-button>
+          <b-button size="sm" @click="enviarCookies(row)" class="mr-2">Aplicar</b-button>
         </template>
       </b-table>
 
       <b-table striped hover :items="lista_convenios" :fields="fields3" v-if="cargada3">
         <template v-slot:cell(acciones)="row">
           <b-button size="sm" @click="lsDatosCorreo(row)" class="mr-2">Divulgar</b-button>
+          <b-button size="sm" @click="enviarCookies(row)" class="mr-2">Aplicar</b-button>
         </template>
       </b-table>
       <br />

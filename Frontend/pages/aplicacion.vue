@@ -95,16 +95,17 @@
         <!-- b-form-select para los convenios disponibles -->
         <b-form-group
           id="input-group-3"
-          label="Tipo convenio:"
+          label="Código de convenio:"
           label-for="input-3"
         >
-          <b-form-select
+          <b-form-input
             id="id_convenio"
             v-model="form.id_convenio"
-            :options="convenios"
+            v-facade="'###########'"
+            disabled
             required
-          >
-          </b-form-select>
+            placeholder="Ingresar el codigo del convenio"
+          ></b-form-input>
         </b-form-group>
 
         <!-- Botones agrupados -->
@@ -156,7 +157,6 @@
           >
         </template>
       </b-table>
-
     </b-container>
   </div>
 </template>

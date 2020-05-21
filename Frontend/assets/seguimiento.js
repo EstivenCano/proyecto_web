@@ -69,7 +69,7 @@ export default {
     },
 
     cargarLS() {
-      let url = "http://127.0.0.1:3001/seguimiento";
+      let url = "https://gestion-movilidad-api.herokuapp.com/seguimiento";
       this.$axios
         .get(url)
         .then(respuesta => {
@@ -86,7 +86,7 @@ export default {
     },
 
     cargarLSA() {
-      let url = "http://127.0.0.1:3001/aplicacion";
+      let url = "https://gestion-movilidad-api.herokuapp.com/aplicacion";
       this.$axios
         .get(url)
         .then(respuesta => {
@@ -100,7 +100,7 @@ export default {
 
     crearSeg() {
       let tr = this.seguimiento;
-      let url = "http://127.0.0.1:3001/seguimiento";
+      let url = "https://gestion-movilidad-api.herokuapp.com/seguimiento";
       this.$axios
         .post(url, tr)
         .then(respuesta => {
@@ -126,7 +126,7 @@ export default {
 
     eliminarSeg() {
       let id = this.seguimiento.id;
-      let url = "http://127.0.0.1:3001/seguimiento/" + id;
+      let url = "https://gestion-movilidad-api.herokuapp.com/seguimiento/" + id;
       var confirmacion = confirm('¿Seguro que desea eliminar el seguimiento con el id ' +id + '?');
       if (confirmacion == true) {
         this.$axios
@@ -169,7 +169,7 @@ export default {
       this.enEdicion = false;
       let id = this.seguimiento.id;
       let tr = this.seguimiento;
-      let url = "http://127.0.0.1:3001/seguimiento/" + id;
+      let url = "https://gestion-movilidad-api.herokuapp.com/seguimiento/" + id;
       this.$axios
         .put(url, tr)
         .then(respuesta => {

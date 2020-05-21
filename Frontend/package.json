@@ -20,6 +20,7 @@
     "nodemailer": "^6.4.6",
     "nuxt": "^2.0.0",
     "veu": "^1.0.1",
+    "vue-cookies": "^1.7.0",
     "vue-input-facade": "^1.1.5"
   },
   "devDependencies": {}

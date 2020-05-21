@@ -22,9 +22,9 @@ const rutas_convenio = require("./routes/listaConvenio");
 app.use(rutas_aplicacion, rutas_tarea, rutas_seguimiento, rutas_convenio,rutas_divulgacion);
 
 //Puerto
-const port = 3001;
+const PORT = process.env.PORT || 3001;
 
 //Levantar el servidor para escuchar los puertos
-app.listen(port, () => {
-  console.log(`Escuchando API en http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Escuchando API en http://localhost:${PORT}`);
 });

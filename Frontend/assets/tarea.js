@@ -26,7 +26,7 @@ export default {
     },
 
     cargarLS() {
-      let url = "http://127.0.0.1:3001/tarea";
+      let url = "https://gestion-movilidad-api.herokuapp.com/tarea";
       this.$axios
         .get(url)
         .then(respuesta => {
@@ -40,7 +40,7 @@ export default {
 
     crearTarea() {
       let tr = this.tarea;
-      let url = "http://127.0.0.1:3001/tarea";
+      let url = "https://gestion-movilidad-api.herokuapp.com/tarea";
       this.$axios
         .post(url, tr)
         .then(respuesta => {
@@ -63,7 +63,7 @@ export default {
 
     eliminarTarea() {
       let id = this.tarea.id;
-      let url = "http://127.0.0.1:3001/tarea/" + id;
+      let url = "https://gestion-movilidad-api.herokuapp.com/tarea/" + id;
       var confirmacion = confirm('¿Seguro que desea eliminar la tarea con el id ' +id + '?');
       if (confirmacion == true) {
         this.$axios
@@ -96,7 +96,7 @@ export default {
       this.enEdicion = false;
       let id = this.tarea.id;
       let tr = this.tarea;
-      let url = "http://127.0.0.1:3001/tarea/" + id;
+      let url = "https://gestion-movilidad-api.herokuapp.com/tarea/" + id;
       this.$axios
         .put(url, tr)
         .then(respuesta => {

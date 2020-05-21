@@ -1,3 +1,7 @@
+import Vue from "vue";
+import VueCookies from "vue-cookies";
+Vue.use(VueCookies);
+
 export default {
   data() {
     return {
@@ -122,7 +126,7 @@ export default {
 
     cargarLStipo() {
       let tipo = this.convenio.tipo_convenio;
-      let url = "http://127.0.0.1:3001/listaConvenio/" + tipo;
+      let url = "https://gestion-movilidad-api.herokuapp.com/listaConvenio/" + tipo;
       this.$axios
         .get(url)
         .then(respuesta => {
@@ -163,7 +167,7 @@ export default {
 
     cargarLSpais() {
       let pais = this.pais.id;
-      let url = "http://127.0.0.1:3001/listaConvenioPais/" + pais;
+      let url = "https://gestion-movilidad-api.herokuapp.com/listaConvenioPais/" + pais;
       this.$axios
         .get(url)
         .then(respuesta => {
@@ -179,7 +183,7 @@ export default {
 
     cargarLSentidad() {
       let entidad = this.entidad.id;
-      let url = "http://127.0.0.1:3001/listaConvenioEntidad/" + entidad;
+      let url = "https://gestion-movilidad-api.herokuapp.com/listaConvenioEntidad/" + entidad;
       this.$axios
         .get(url)
         .then(respuesta => {
@@ -230,7 +234,7 @@ export default {
 
     enviarCorreo() {
       this.datosCorreo.correos = document.getElementById("correos").value;
-      let url = "http://localhost:3001/divulgacion/correo";
+      let url = "https://gestion-movilidad-api.herokuapp.com/divulgacion/correo";
       this.$axios
         .post(url, this.datosCorreo)
         .then(respuesta => {
@@ -244,6 +248,12 @@ export default {
 
     ocultarModal() {
       this.$refs["my-modal"].hide();
+    },
+
+    enviarCookies({item}){
+      this.$cookies.set('convenio',item);   
+      window.open('https://gestion-movilidad-udem.herokuapp.com/aplicacion','_self')
     }
+
   }
 };
