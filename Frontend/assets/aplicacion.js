@@ -1,42 +1,49 @@
-import { InputFacade, facade, filter } from 'vue-input-facade';
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import {
+  InputFacade,
+  facade,
+  filter
+} from 'vue-input-facade';
 import Vue from "vue";
 import VueCookies from "vue-cookies";
+import VueSimpleAlert from "vue-simple-alert";
+Vue.use(VueSimpleAlert);
 Vue.use(VueCookies);
-Vue.use(BootstrapVue)
-Vue.use(IconsPlugin)
 
 export default {
   beforeMount() {
-    //Inicializa las cookies vacias
-    this.$cookies.set('convenio',{});  
     //Limpia los campos del formulario para evitar errores de validación
     this.limpiarLista();
     //Carga las aplicaciones antes de ser llamadas por la página.
     this.cargarLista();
     //Verifica si existe cookies guardadas
     this.verificarCookies();
-    
+
   },
 
-  components: { InputFacade },
-  directives: { facade },
-  filters: { facade: filter },
+  components: {
+    InputFacade
+  },
+  directives: {
+    facade
+  },
+  filters: {
+    facade: filter
+  },
 
   data() {
     return {
-      
+
       /*Determina si la aplicación se encuentra en estado de edición*/
       enEdicion: false,
       /*Array de aplicaciones*/
       aplicaciones: [],
 
-      datosCorreo:{
+      datosCorreo: {
         id: '',
         correos: '',
       },
       /*Item temporal donde se guardan los datos de una fila de la lista */
-      item:{},
+      item: {},
       /*Campos mostrados en la lista de aplicaciones */
       fields: ["id", "nombre", "apellido", "correo", "celular", "id_convenio", "acciones"],
       /*Objeto de aplicaciones*/
@@ -73,7 +80,7 @@ export default {
     datosFormulario() {
 
       this.form = {
-      
+
         nombre: document.getElementById('nombre').value,
         apellido: document.getElementById('apellido').value,
         correo: document.getElementById('correo').value,
@@ -110,16 +117,24 @@ export default {
       let url = 'https://gestion-movilidad-api.herokuapp.com/aplicacion'
       this.$axios.post(url, this.datosFormulario()).then(respuesta => {
         //Recarga los marcadores de la base de datos.
-        alert("Aplicación guardada con éxito")
+        this.$fire({
+          title: "Aplicación guardada",
+          text: "La aplicación fue guardada con exito",
+          type: "success",
+          timer: 3000
+        }).then(r => {
+          window.open('https://gestion-movilidad-udem.herokuapp.com/listaConvenios', '_self');
+        });
+        //alert("Aplicación guardada con éxito")
         this.cargarLista();
         //Reestablece los campos del formulario.
         this.limpiarLista();
 
-        window.open('https://gestion-movilidad-udem.herokuapp.com/listaConvenios','_self');
+
       });
     },
 
-    verificarCookies(){
+    verificarCookies() {
       let convenio = this.$cookies.get('convenio');
       this.form.id_convenio = convenio.id
     },
@@ -130,15 +145,35 @@ export default {
     }) {
       let url = `https://gestion-movilidad-api.herokuapp.com/aplicacion/${item.id}`
 
-      var opcion = confirm(`¿Desea eliminar la aplicación ${item.id}?`);
-      if (opcion == true) {
-        this.$axios.delete(url, this.datosFormulario()).then(respuesta => {
-          this.cargarLista();
-          alert(`La aplicación ${item.id} ha sido eliminada`);
-        }).catch(error => {});
-      } else {
-        alert(`La operación ha sido cancelada`);
-      }
+      this.$fire({
+        title: "Precaución",
+        text: "¿Desea eliminar la aplicación?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si, Eliminar',
+        cancelButtonText: 'No, Cancelar',
+        reverseButtons: true
+      }).then(r => {
+        if (r.value) {
+          this.$axios.delete(url, this.datosFormulario()).then(respuesta => {
+            this.cargarLista();
+          }).catch(error => {});
+          this.$fire({
+            title: 'Eliminada!',
+            text: 'La aplicación ha sido eliminada correctamente.',
+            type: 'success',
+            timer: 3000
+          })
+        } else {
+          this.$fire({
+            title: 'Cancelada',
+            text: 'La operación ha sido cancelada',
+            type: 'error',
+            timer: 3000
+          })
+        }
+      });
+
     },
 
 
@@ -177,7 +212,12 @@ export default {
       let url = `https://gestion-movilidad-api.herokuapp.com/aplicacion/${this.item.id}`
       this.$axios.put(url, actualizado).then(respuesta => {
         //Alerta de éxito.
-        alert(`La aplicación ${this.item.id} ha sido actualizada`);
+        this.$fire({
+          title: 'Actualizada!',
+          text: 'La aplicación ha sido actualizada correctamente.',
+          type: 'success',
+          timer: 3000
+        })
         //Reestablece el objeto.
         this.item = {};
         //Cambia el estado de edición, y con ello la visibilidad del botón. 
@@ -186,7 +226,12 @@ export default {
         this.cancelarEdicion();
       }).catch(error => {
         //Alerta de error.
-        alert(`No pudo actualizarse la aplicación, error: ${error}`)
+        this.$fire({
+          title: 'Error',
+          text: 'No pudo actualizarse la aplicación',
+          type: 'error',
+          timer: 3000
+        })
         this.item = {};
         this.enEdicion = false;
       });
@@ -194,16 +239,16 @@ export default {
     },
 
     //Cancela la edición de la aplicación.
-    cancelarEdicion(){
+    cancelarEdicion() {
 
       this.form.id = '';
       this.form.nombre = '';
       this.form.apellido = '';
       this.form.correo = '';
       this.form.celular = '';
-      this.form.id_usuario ='';
-      this.form.id_convenio = null;
-      this.enEdicion =false;
+      this.form.id_usuario = '';
+      this.form.id_convenio = '';
+      this.enEdicion = false;
       this.item = {};
       this.refrescarFormulario();
 
@@ -217,12 +262,11 @@ export default {
       this.form.correo = '';
       this.form.celular = '';
       this.form.id_usuario = '';
-      this.form.id_convenio = null;
       this.refrescarFormulario();
- 
+
     },
 
-    refrescarFormulario(){
+    refrescarFormulario() {
       this.show = false;
       this.$nextTick(() => {
         this.show = true;

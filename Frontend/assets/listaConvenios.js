@@ -1,5 +1,7 @@
 import Vue from "vue";
 import VueCookies from "vue-cookies";
+import VueSimpleAlert from "vue-simple-alert";
+Vue.use(VueSimpleAlert);
 Vue.use(VueCookies);
 
 export default {
@@ -238,11 +240,21 @@ export default {
       this.$axios
         .post(url, this.datosCorreo)
         .then(respuesta => {
-          alert("Exito");
-          console.log(this.datosCorreo.correos);
+          this.$fire({
+            title: 'Exito!',
+            text: 'La aplicación fue enviada a los correos indicados.',
+            type: 'success',
+            timer: 2500
+          })
+          //console.log(this.datosCorreo.correos);
         })
         .catch(error => {
-          alert("Fracaso");
+          this.$fire({
+            title: 'Error',
+            text: 'No se pudo enviar la aplicación seleccionada',
+            type: 'error',
+            timer: 2500
+          })
         });
     },
 
@@ -251,8 +263,32 @@ export default {
     },
 
     enviarCookies({item}){
-      this.$cookies.set('convenio',item);   
-      window.open('https://gestion-movilidad-udem.herokuapp.com/aplicacion','_self')
+
+      this.$fire({
+        title: "Convenio",
+        text: "¿Desea aplicar para el convenio?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No',
+        reverseButtons: true
+      }).then(r => {
+        if (r.value) {
+          
+          this.$cookies.set('convenio',item);   
+          window.open('https://gestion-movilidad-udem.herokuapp.com/aplicacion','_self')
+
+        } else {
+          this.$fire({
+            title: 'Cancelada',
+            text: 'La operación ha sido cancelada',
+            type: 'error',
+            timer: 3000
+          })
+        }
+      });
+
+    
     }
 
   }

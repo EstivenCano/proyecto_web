@@ -1,3 +1,7 @@
+import Vue from "vue";
+import VueSimpleAlert from "vue-simple-alert";
+Vue.use(VueSimpleAlert);
+
 export default {
   data() {
     return {
@@ -40,8 +44,7 @@ export default {
         celular: "",
         id_convenio: null
       },
-      estados: [
-        {
+      estados: [{
           text: "Selección de concepto",
           value: null
         },
@@ -105,12 +108,22 @@ export default {
         .post(url, tr)
         .then(respuesta => {
           if (respuesta.data.ok == true) {
-            alert("Seguimiento Guardado con Éxito");
+            this.$fire({
+              title: 'Éxito!',
+              text: 'El seguimiento ha sido guardado exitosamente.',
+              type: 'success',
+              timer: 2500
+            })
           } else {
-            alert("Error: " + respuesta.data.mensaje);
+            this.$fire({
+              title: 'Error',
+              text: 'No ha sido posible crear el seguimiento.',
+              type: 'error',
+              timer: 2500
+            })
           }
           console.log(respuesta);
-          
+
           this.cargarLS();
         })
         .catch(error => {});
@@ -127,42 +140,84 @@ export default {
     eliminarSeg() {
       let id = this.seguimiento.id;
       let url = "https://gestion-movilidad-api.herokuapp.com/seguimiento/" + id;
-      var confirmacion = confirm('¿Seguro que desea eliminar el seguimiento con el id ' +id + '?');
-      if (confirmacion == true) {
-        this.$axios
-        .delete(url)
-        .then(respuesta => {
-          if (respuesta.data.rowCount != 0) {
-            alert("Seguimiento Eliminado con Éxito");
-          } else {
-            alert("Seguimiento inexistente");
-          }
-          this.cargarLS();
-        })
-        .catch(error => {});
-      }else {
-        alert('La operación ha sido cancelada');
-      }      
+
+      this.$fire({
+        title: "Precaución",
+        text: "¿Desea eliminar el seguimiento?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si, Eliminar',
+        cancelButtonText: 'No, Cancelar',
+        reverseButtons: true
+      }).then(r => {
+        if (r.value) {
+
+          this.$axios
+            .delete(url)
+            .then(respuesta => {
+              if (respuesta.data.rowCount != 0) {
+                this.$fire({
+                  title: 'Éxito!',
+                  text: 'Seguimiento eliminado exitosamente.',
+                  type: 'success',
+                  timer: 2500
+                })
+              } else {
+                this.$fire({
+                  title: 'Error',
+                  text: 'Seguimiento inexistente.',
+                  type: 'success',
+                  timer: 2500
+                })
+              }
+              this.cargarLS();
+            })
+            .catch(error => {});
+
+        } else {
+
+          this.$fire({
+            title: 'Cancelada',
+            text: 'La operación ha sido cancelada',
+            type: 'error',
+            timer: 2500
+          })
+        }
+
+      });
       this.seguimiento = {
         id: ""
       };
     },
 
-    cargarSeg({ item }) {
+    cargarSeg({
+      item
+    }) {
       let aux = this.lista_seguimientos.find(
         seguimiento => seguimiento.id == item.id
       );
       this.enEdicion = true;
       this.seguimiento = Object.assign({}, aux);
-      alert("Ahora Puedes Modificar el Seguimiento");
+      this.$fire({
+        title: 'Modificación',
+        text: 'Ahora puedes modificar el seguimiento',
+        timer: 1500
+      })
+      
     },
 
-    cargarId({ item }) {
+    cargarId({
+      item
+    }) {
       let aux = this.lista_aplicaciones.find(
         aplicacion => aplicacion.id == item.id
       );
       this.seguimiento.id_aplicacion = aux.id;
-      alert("Ahora Puedes Realizar el Seguimiento");
+      this.$fire({
+        title: 'Cargar',
+        text: 'Ahora puedes realizar el seguimiento',
+        timer: 1500
+      })
     },
 
     actualizarSeg() {
@@ -173,7 +228,12 @@ export default {
       this.$axios
         .put(url, tr)
         .then(respuesta => {
-          alert("Seguimiento Actualizado");
+          this.$fire({
+            title: 'Actualización',
+            text: 'Seguimiento actualizado correctamente',
+            type: 'success',
+            timer: 2500
+          })
           this.cargarLS();
         })
         .catch(error => {});
@@ -187,7 +247,7 @@ export default {
       };
     },
 
-    cancelarEdicion(){
+    cancelarEdicion() {
       this.seguimiento.id = "";
       this.seguimiento.id_aplicacion = "";
       this.seguimiento.fecha = "";

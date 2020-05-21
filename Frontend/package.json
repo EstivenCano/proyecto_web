@@ -22,7 +22,8 @@
     "nuxt": "^2.0.0",
     "veu": "^1.0.1",
     "vue-cookies": "^1.7.0",
-    "vue-input-facade": "^1.1.5"
+    "vue-input-facade": "^1.1.5",
+    "vue-simple-alert": "^1.1.1"
   },
   "devDependencies": {}
 }

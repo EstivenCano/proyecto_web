@@ -1,3 +1,7 @@
+import Vue from "vue";
+import VueSimpleAlert from "vue-simple-alert";
+Vue.use(VueSimpleAlert);
+
 export default {
   data() {
     return {
@@ -45,9 +49,19 @@ export default {
         .post(url, tr)
         .then(respuesta => {
           if (respuesta.data.ok == true) {
-            alert("Tarea Guardada con Éxito");
+            this.$fire({
+              title: 'Éxito!',
+              text: 'Tarea guardada exitosamente.',
+              type: 'success',
+              timer: 2500
+            })         
           } else {
-            alert("Error al Guardar Tarea");
+            this.$fire({
+              title: 'Error',
+              text: 'No se pudo guardar la tarea.',
+              type: 'success',
+              timer: 2500
+            })
           }
           this.cargarLS();
         })
@@ -64,22 +78,51 @@ export default {
     eliminarTarea() {
       let id = this.tarea.id;
       let url = "https://gestion-movilidad-api.herokuapp.com/tarea/" + id;
-      var confirmacion = confirm('¿Seguro que desea eliminar la tarea con el id ' +id + '?');
-      if (confirmacion == true) {
-        this.$axios
+
+
+      
+      this.$fire({
+        title: "Precaución",
+        text: "¿Desea eliminar la tarea?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si, Eliminar',
+        cancelButtonText: 'No, Cancelar',
+        reverseButtons: true
+      }).then(r => {
+        if (r.value) {
+          this.$axios
         .delete(url)
         .then(respuesta => {
           if (respuesta.data.rowCount != 0) {
-            alert("Tarea Eliminada con Éxito");
+            this.$fire({
+              title: 'Eliminada!',
+              text: 'La tarea ha sido eliminada correctamente.',
+              type: 'success',
+              timer: 3000
+            })
           } else {
-            alert("Tarea inexistente");
+            this.$fire({
+              title: 'Error',
+              text: 'Tarea inexistente.',
+              type: 'error',
+              timer: 3000
+            })
           }
           this.cargarLS();
         })
         .catch(error => {});
-      }else {
-        alert('La operación ha sido cancelada');
-      }
+          
+        } else {
+          this.$fire({
+            title: 'Cancelada',
+            text: 'La operación ha sido cancelada',
+            type: 'error',
+            timer: 3000
+          })
+        }
+      });
+
       this.tarea = {
         id: ""
       };
@@ -89,7 +132,11 @@ export default {
       let aux = this.lista_tareas.find(tarea => tarea.id == item.id);
       this.enEdicion = true;
       this.tarea = Object.assign({}, aux);
-      alert("Ahora Puedes Modificar la Tarea");
+      this.$fire({
+        title: 'Mensaje',
+        text: 'Anora puedes modificar la tarea.',
+        timer: 1500
+      })
     },
 
     actualizarTarea() {
@@ -100,7 +147,12 @@ export default {
       this.$axios
         .put(url, tr)
         .then(respuesta => {
-          alert("Tarea Actualizada");
+          this.$fire({
+            title: 'Actualización',
+            text: 'Tarea actualizada exitosamente.',
+            type: 'success',
+            timer: 2500
+          })
           this.cargarLS();
         })
         .catch(error => {});

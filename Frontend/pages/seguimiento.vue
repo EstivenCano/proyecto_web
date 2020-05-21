@@ -152,7 +152,7 @@
         @reset="onReset"
       >
         <b-form-group
-          label="Ingrese ID de la seguimiento a eliminar"
+          label="Ingrese ID del seguimiento a eliminar"
           label-for="id"
         >
           <b-form-input
