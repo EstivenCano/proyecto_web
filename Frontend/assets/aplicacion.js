@@ -1,15 +1,20 @@
 import { InputFacade, facade, filter } from 'vue-input-facade';
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import Vue from "vue";
 import VueCookies from "vue-cookies";
 Vue.use(VueCookies);
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
 
 export default {
   beforeMount() {
+    //Inicializa las cookies vacias
+    this.$cookies.set('convenio',{});  
     //Limpia los campos del formulario para evitar errores de validación
     this.limpiarLista();
     //Carga las aplicaciones antes de ser llamadas por la página.
     this.cargarLista();
-
+    //Verifica si existe cookies guardadas
     this.verificarCookies();
     
   },

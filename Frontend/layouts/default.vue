@@ -10,7 +10,7 @@
           width="120px"
         />
         <b-navbar-brand href="#"></b-navbar-brand>
-        <b-navbar-brand href>Gestion de Movilidad</b-navbar-brand>
+        <b-navbar-brand href>Gestión de Movilidad</b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -18,8 +18,8 @@
           <b-navbar-nav>
             <b-nav-item v-if="admin">|</b-nav-item>
             <b-nav-item :to="{ name: 'tarea' }" v-if="admin">Tareas</b-nav-item>
-            <b-nav-item v-if="usuario">|</b-nav-item>
-            <b-nav-item :to="{ name: 'aplicacion' }" v-if="usuario">Aplicación</b-nav-item>
+            <b-nav-item v-if="admin">|</b-nav-item>
+            <b-nav-item :to="{ name: 'aplicacion' }" v-if="admin">Aplicación</b-nav-item>
             <b-nav-item v-if="admin">|</b-nav-item>
             <b-nav-item :to="{ name: 'seguimiento' }" v-if="admin">Seguimiento</b-nav-item>
             <b-nav-item v-if="usuario">|</b-nav-item>

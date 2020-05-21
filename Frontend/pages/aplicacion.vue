@@ -1,22 +1,17 @@
 <template>
   <div>
     <!-- Card para delimitar el tamaño del formulario y centrarlo en la pagina -->
-    <b-container fluid="md">
-      <!-- Centrar contenido -->
-      <center>
+    <b-container fluid="md" id = "container">
+      <br />
+      <div id="titlecontent">
+        <div>
+          FORMULARIO DE APLICACIÓN
+        </div>
         <!-- Salto de linea -->
         <br />
-        <!-- Titulo principal -->
-        <h1>Formulario de aplicación a convenio</h1>
-        <!-- Imagen decorativa sobre formularios -->
-        <img
-          src="https://pngimage.net/wp-content/uploads/2018/06/formulario-png-5.png"
-          fluid
-          alt="Responsive image"
-          height="100px"
-          width="100px"
-        />
-      </center>
+      </div>
+      <!-- Centrar contenido -->
+
       <!-- Linea divisora -->
       <hr />
 
@@ -54,7 +49,7 @@
 
         <b-form-group
           id="input-group-1"
-          label="Correo Electronico:"
+          label="Correo Electrónico:"
           label-for="input-1"
           description="Este correo no sera compartido."
         >
@@ -130,15 +125,17 @@
 
       <!-- Linea divisora -->
       <hr />
-      <br />
-      <center>
-        <h3>Lista de aplicaciones</h3>
-        <br />
-      </center>
+
+      <div id="titlecontent">
+       
+          LISTA DE APLICACIONES
+  
+      </div>
+
       <br />
 
       <!-- Tabla de aplicaciones -->
-      <b-table striped hover :items="aplicaciones" :fields="fields">
+      <b-table striped hover responsive bordered :items="aplicaciones" :fields="fields">
         <template v-slot:cell(acciones)="row">
           <!-- Botones para editar y eliminar aplicaciones de la lista -->
           <b-button
@@ -157,9 +154,44 @@
           >
         </template>
       </b-table>
+      <br />
     </b-container>
   </div>
 </template>
 
 <!-- Codigo .js para la pagina aplicacion.vue -->
 <script src="@/assets/aplicacion.js" />
+
+<style>
+#titlecontent {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  font-family: Oswald, sans-serif;
+  font-size: 20px;
+  color: #076a94;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+  align-content: center;
+  font-weight: bold;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+#container {
+margin-top: 30px;
+margin-bottom: 30px;
+background-color: #fff;
+border-radius: 30px;
+flex-wrap: nowrap;
+justify-content: center;
+align-content: stretch;
+box-shadow: -7px 7px 26px 0 #969696;
+}
+</style>

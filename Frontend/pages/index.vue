@@ -1,21 +1,30 @@
 <template>
   <div>
-    <b-container fluid="md">
+    <b-container fluid="md" id="container">
       <br />
       <center>
-        <h1>Gestión de Movilidad</h1>
+        <div id="titlecontent">
+          GESTIÓN DE MOVILIDAD
+        </div>
       </center>
       <br />
+      <br />
+
 
       <div class="info-columna">
         <p>
-          <center><h4> Desarrollada por:</h4></center>
+          <center><h4>Desarrollada por:</h4></center>
           <center>
-          JOAN SEBASTIÁN CADENA PATERNINA<br />
-          ESTIVEN CANO URREGO<br />
-          SEBASTIÁN DÍEZ VALLEJO
-        </center>
-        
+            JOAN SEBASTIÁN CADENA PATERNINA<br />
+            ESTIVEN CANO URREGO<br />
+            SEBASTIÁN DÍEZ VALLEJO
+            <br />
+            <b-img
+              src="https://www.precheck.com/sites/default/files/3%20Ways%20to%20Develop%20Effective%20Healthcare%20Leaders.png"
+              fluid
+              alt="Responsive image"
+            ></b-img>
+          </center>
         </p>
         <hr />
       </div>
@@ -28,7 +37,6 @@ export default {
   components: {}
 };
 </script>
-
 
 <style>
 .container {
@@ -60,5 +68,33 @@ export default {
 
 .links {
   padding-top: 15px;
+}
+
+#titlecontent {
+  margin-top: 10px;
+  font-family: Oswald, sans-serif;
+  font-size: 25px;
+  color: #076a94;
+  align-items: center;
+  align-content: center;
+  font-weight: bold;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+#container {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background-color: #fff;
+  border-radius: 30px;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: stretch;
+  box-shadow: -7px 7px 26px 0 #969696;
 }
 </style>
