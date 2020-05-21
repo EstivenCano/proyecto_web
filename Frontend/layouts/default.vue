@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <b-navbar toggleable="lg" type="dark" variant="dark">
+      <b-navbar toggleable="lg" type="dark" variant="danger">
         <img
           src="https://pqrsf.udem.edu.co/img/logo.png"
           fluid
@@ -16,14 +16,14 @@
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <b-nav-item v-show="true">|</b-nav-item>
-            <b-nav-item :to="{ name: 'tarea' }" v-show="true">Tareas</b-nav-item>
-            <b-nav-item>|</b-nav-item>
-            <b-nav-item :to="{ name: 'aplicacion' }">Aplicación</b-nav-item>
-            <b-nav-item>|</b-nav-item>
-            <b-nav-item :to="{ name: 'seguimiento' }">Seguimiento</b-nav-item>
-            <b-nav-item>|</b-nav-item>
-            <b-nav-item :to="{ name: 'listaConvenios' }">Buscar convenios</b-nav-item>
+            <b-nav-item v-if="admin">|</b-nav-item>
+            <b-nav-item :to="{ name: 'tarea' }" v-if="admin">Tareas</b-nav-item>
+            <b-nav-item v-if="usuario">|</b-nav-item>
+            <b-nav-item :to="{ name: 'aplicacion' }" v-if="usuario">Aplicación</b-nav-item>
+            <b-nav-item v-if="admin">|</b-nav-item>
+            <b-nav-item :to="{ name: 'seguimiento' }" v-if="admin">Seguimiento</b-nav-item>
+            <b-nav-item v-if="usuario">|</b-nav-item>
+            <b-nav-item :to="{ name: 'listaConvenios' }" v-if="usuario">Buscar convenios</b-nav-item>
             <b-nav-item>|</b-nav-item>
           </b-navbar-nav>
 
@@ -34,8 +34,8 @@
               <template v-slot:button-content>
                 <em>Ingresar</em>
               </template>
-              <b-dropdown-item href="#">Usuario</b-dropdown-item>
-              <b-dropdown-item href="#">Admin</b-dropdown-item>
+              <b-dropdown-item @click="loginUsuario()">Usuario</b-dropdown-item>
+              <b-dropdown-item @click="loginAdmin()">Admin</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
@@ -46,9 +46,6 @@
 </template>
 
 <style>
-.navbar.navbar-dark.bg-dark {
-  background-color: brown !important;
-}
 
 html {
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -60,6 +57,12 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+}
+
+body {
+  background-image: url("https://proyecto-seguridad-udem.herokuapp.com/_nuxt/img/4b15d96.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 *,
@@ -98,3 +101,5 @@ html {
   background-color: #35495e;
 }
 </style>
+
+<script src="@/assets/default.js"/>
