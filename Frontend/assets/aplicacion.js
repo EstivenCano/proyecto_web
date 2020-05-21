@@ -136,7 +136,9 @@ export default {
 
     verificarCookies() {
       let convenio = this.$cookies.get('convenio');
-      this.form.id_convenio = convenio.id
+      if (convenio != null) {
+        this.form.id_convenio = convenio.id        
+      }
     },
 
     //Elimina el marcador seleccionado. 
