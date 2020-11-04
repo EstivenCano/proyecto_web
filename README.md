@@ -12,10 +12,10 @@ a. Registro de info básica personal (según formulario)
 b. Registro de info específica, por tipo de convenio (según formulario)
 c. Gestión de archivos adjuntos, soportes de la solicitud
 6. Revisión de aplicaciones
-a. revisión de ‘aplicación’
-b. registro de observaciones
-c. selección de concepto (aprobado o rechazado)
-d. notificación a actor
+a. Revisión de ‘aplicación’
+b. Registro de observaciones
+c. Selección de concepto (aprobado o rechazado)
+d. Notificación a actor
 
 # Desarrolladores
 1. Joan Cadena Paternina - Estudiante de ingenieria de sistemas de 5to semestre - innmortal_20@live.com
