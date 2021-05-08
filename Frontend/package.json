@@ -21,7 +21,7 @@
     "cors": "^2.8.5",
     "crypto-js": "^4.0.0",
     "fs": "0.0.1-security",
-    "handlebars": "^4.7.6",
+    "handlebars": "^4.7.7",
     "nodemailer": "^6.4.6",
     "nuxt": "^2.0.0",
     "nuxt-sweetalert2": "^1.0.0",
